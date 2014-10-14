@@ -1,3 +1,19 @@
-jetzt ändere ich es auch!!!! :( BLABLABLABLA
+#ifndef __h_list__
+#define __h_list__
 
-Noch eine Aenderung!
+struct node{
+	struct node *succ;
+	char *vorname;
+	char *nachname;
+};
+
+
+
+
+
+
+
+
+
+
+#endif
