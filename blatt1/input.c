@@ -1,5 +1,8 @@
 #include "input.h"
 #include "assert.h"
+/*FIXME: Reimplement strlen*/
+#include <string.h>
+#include <stdlib.h>
 
 #define MAX_NAME_SIZE 100
 /*the additional chars are for linefeed*/
@@ -15,7 +18,7 @@
  *  fuck();
  * }
  */
-#define ALLOC_OR(dest, num) if(!( (dest) = calloc(num, sizeof( *(dest) )) )
+#define ALLOC_OR(dest, num) if(!( (dest) = calloc(num, sizeof( *(dest) )) ))
 
 /*
  * Copys a null terminated string from src to dest, and makes sure that dest is not overflowed and null-terminated
@@ -30,7 +33,7 @@ struct node *read_name(FILE* fp) {
     char buff[BUFF_SIZE];
     char *space;
 
-    size_t firstname_len, lastname_len;
+    size_t firstname_size, lastname_size;
     
     struct node* person;
     char* first_name, *last_name;
@@ -41,7 +44,7 @@ struct node *read_name(FILE* fp) {
 
     space = find_char(buff, ' ');
     
-    assert(space != NULL && "Expected input format: `Firstname<space>Lastname<linebreak`")
+    assert(space != NULL && "Expected input format: `Firstname<space>Lastname<linebreak>");
     
     /*Off by ones ahead!*/
     /*
@@ -65,11 +68,11 @@ struct node *read_name(FILE* fp) {
     ALLOC_OR(first_name, firstname_size) return NULL;
     ALLOC_OR(last_name, lastname_size) return NULL;
 
-    str_copy(buf, first_name, firstname_size);
-    str_copy(space+1, last_name, lastname_size);
+    string_copy(buff, first_name, firstname_size);
+    string_copy(space+1, last_name, lastname_size);
 
-    person.first_name = first_name;
-    person.last_name = last_name;
+    person->first_name = first_name;
+    person->last_name = last_name;
 
     return person;
     
