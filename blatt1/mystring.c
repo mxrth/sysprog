@@ -21,9 +21,6 @@ enum Ordering compare_strings(const char* a, const char* b) {
 			}
 			return Smaller;
 		}
-		if(*(b+i) =='\0') {
-			return Greater;
-		}
 		if(*(a+i)<*(b+i)){
 			return Smaller;
 		}
