@@ -19,7 +19,7 @@ struct node *read_name(FILE* in);
  * Tries to read a filename from stdin an opens the file.
  * Returns a file handle on success, NULL otherwise
  */
-FILE* get_input_file();
+FILE* get_input_file(void);
 
 
 
