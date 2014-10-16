@@ -1,8 +1,6 @@
 #include "input.h"
 #include "mystring.h"
 #include <assert.h>
-/*FIXME: Reimplement strlen*/
-#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 /*
