@@ -11,7 +11,27 @@
  * If a is a prefix of b and not equal to b, a is considered smaller
  * The empty string is smaller than all other strings.
  */
-enum Ordering compare_strings(const char* a, const char* b);
+enum Ordering compare_strings(const char* a, const char* b) {
+	int i = 0;
+	while(1){
+		/*tests if one of the strings is empty*/
+		if(*(a+i) == '\0') {
+			if(*(b+i) =='\0') {
+				return Equal;
+			}
+			return Smaller;
+		}
+		if(*(a+i)<*(b+i)){
+			return Smaller;
+		}
+		if(*(a+i)>*(b+i)){
+			return Greater;
+		}
+		if(*(a+i) == *(b+i)){
+			i++;
+		}
+	}
+}
 
 /*
  * Returns a pointer to the first occurrence of `needle` in `haystack`, NULL if it is not present.
@@ -20,12 +40,9 @@ char *find_char(const char * haystack, char needle) {
 	char *cursor = haystack;
 	while(*cursor != needle) {
 		cursor++;
-		printf("cursor has been incremented\n");
 		if(*cursor == '\0') {
-			printf("I didn't find it\n");
 			return NULL;
 		}
 	}
-	printf("I found something\n");
 	return cursor;
 }
