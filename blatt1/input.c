@@ -21,9 +21,19 @@
  * Copys a null terminated string from src to dest, and makes sure that dest is not overflowed and null-terminated
  *
  * dest_size: number of chars dest can hold
+ * returns number of chars copyed from src
  */
-string_copy(const char* src, char* dest, size_t dest_size) {
-    
+size_t string_copy(const char* src, char* dest, size_t dest_size) {
+    size_t copied = 0;
+    const size_t copy_max = dest_size - 1; /*leave space for null byte*/
+    while(*src != '\0' && copied < copy_max) {
+	*dest = *src;
+	src++; dest++;
+	copied++;
+    }
+    /*after the while dest points one past the last copied char*/
+    *dest = '\0';
+    return copied;
 }
 
 struct node *read_name(FILE* fp) {
