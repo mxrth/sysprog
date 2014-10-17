@@ -28,7 +28,7 @@ void free_list(struct node* list){
 /* < */
 int is_smaller(struct node* p1, struct node* p2) {
 	if(compare_strings(p1->last_name, p2->last_name) == Smaller) return 1;
-	if(compare_strings(p1->first_name, p2->first_name) == Smaller) return 1;
+	if(compare_strings(p1->last_name, p2->last_name) == Equal && compare_strings(p1->first_name, p2->first_name) == Smaller) return 1;
 	return 0;
 }
 
