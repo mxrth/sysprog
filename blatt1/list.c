@@ -58,6 +58,7 @@ struct node * insert_sorted(struct node* list, struct node* new_entry){
 		if(is_smaller(new_entry,temp->succ)){
 			new_entry->succ=temp->succ;
 			temp->succ=new_entry;
+			return;
 		}
 	}
 	temp->succ=new_entry;
