@@ -73,7 +73,7 @@ struct node *read_name(FILE* fp) {
 
 FILE *get_input_file(void) {
     char path[255];
-    printf("Please input file name");
+    printf("Please input file name\n");
     scanf("%255s", path);
     return fopen(path, "r");
 }
