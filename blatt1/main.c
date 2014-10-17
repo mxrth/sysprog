@@ -2,6 +2,7 @@
 #include "list.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #define ERROR(s) {fprintf(stderr, "%s", (s)); exit(EXIT_FAILURE);}
 
@@ -20,6 +21,8 @@ int main(void) {
     print_list(list);
 
     free_list(list);
+
+    fclose(in_file);
 
     return EXIT_SUCCESS;
 }
