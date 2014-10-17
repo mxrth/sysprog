@@ -17,7 +17,7 @@ void free_node(struct node* node){
 }
 
 void free_list(struct node* list){
-    struct node *to_free, *succ;
+    struct node *succ;
     while(list != NULL) {
 	succ = list->succ;
 	free_node(list);

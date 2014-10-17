@@ -1,7 +1,4 @@
-
-#include <stdio.h>
 #include "mystring.h"
-
 
 /*
  * Compares two strings lexically.
@@ -34,15 +31,28 @@ enum Ordering compare_strings(const char* a, const char* b) {
 }
 
 /*
- * Returns a pointer to the first occurrence of `needle` in `haystack`, NULL if it is not present.
+ * Copys a null terminated string from src to dest, and makes sure that dest is not overflowed and null-terminated
+ *
+ * dest_size: number of chars dest can hold
+ * returns number of chars copyed from src
  */
-char *find_char(const char * haystack, char needle) {
-	char *cursor = haystack;
-	while(*cursor != needle) {
-		cursor++;
-		if(*cursor == '\0') {
-			return NULL;
-		}
-	}
-	return cursor;
+size_t string_copy(const char* src, char* dest, size_t dest_size) {
+    size_t copied = 0;
+    const size_t copy_max = dest_size - 1; /*leave space for null byte*/
+    while(*src != '\0' && copied < copy_max) {
+	*dest = *src;
+	src++; dest++;
+	copied++;
+    }
+    /*after the loop dest points one past the last copied char*/
+    *dest = '\0';
+    return copied;
 }
+
+size_t string_len(const char *str) {
+    size_t len = 0;
+    for(;*str != '\0'; str++, len++);
+    return len;
+}
+
+

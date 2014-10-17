@@ -1,6 +1,8 @@
 #ifndef __h_mystring__
 #define __h_mystring__
 
+#include <stddef.h>
+
 enum Ordering {
 	Greater,
 	Equal,
@@ -22,9 +24,20 @@ enum Ordering compare_strings(const char* a, const char* b);
  */
 char *find_char(const char * haystack, char needle);
 
+/* 
+ * Calculates the length of a given char
+ * Assumes it is null terminated
+ */
+size_t string_len(const char *);
 
-
-
+/*
+ * Copys a null terminated string from src to dest, and makes sure that dest is not overflowed and null-terminated
+ *
+ * dest_size: number of chars dest can hold
+ * returns number of chars copyed from src
+ */
+size_t string_copy(const char* src, char* dest, size_t dest_size); 
+ 
 
 
 
