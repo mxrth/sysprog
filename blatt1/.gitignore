@@ -1,2 +1,6 @@
 # ignore object files
 *.o
+
+#ignore the final progran
+
+person_list
