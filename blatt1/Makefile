@@ -11,7 +11,7 @@ $(EXECUTABLE): input.o output.o main.o output.o list.o mystring.o
 
 #These can be made with implicit rules, only the dependencies are specified
 
-main.o: main.c input.h mystring.h list.h 
+main.o: main.c input.h list.h 
 
 input.o: input.c input.h mystring.h list.h
 
