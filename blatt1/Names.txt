@@ -15,3 +15,4 @@ Werner Weitz
 Petra Hamm
 Fridolin Schwarz
 Karl-Friedrich Gauss
+Zorro Zabel
