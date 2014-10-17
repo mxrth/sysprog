@@ -16,6 +16,20 @@ void free_node(struct node* node){
 	return;
 }
 
+void free_list(struct node* list){
+	struct node* temp = list;
+	struct node* clear;
+	while(temp->succ!=NULL){
+		clear = temp;
+		
+	
+	
+	}
+	
+	
+	return;
+}
+
 struct node * insert_sorted(struct node* list, struct node* new_entry){
 	struct node* temp = list;
 	/*
@@ -28,30 +42,26 @@ struct node * insert_sorted(struct node* list, struct node* new_entry){
 	/*
 	Otherwise run through the list
 	*/
+	if(is_smaller(new_entry,temp)){
+		new_entry->succ = temp;
+		list = new_entry;
+		return list;
+	}
 	for(;temp->succ!=NULL;temp=temp->succ){
-		if(compare_strings(new_entry->last_name,temp->succ->last_name)==Greater){
-			continue;
-		}
-		if(compare_strings(new_entry->last_name,temp->succ->last_name)==Equal){
-			if(compare_strings(new_entry->first_name,temp->succ->last_name)==Greater){
-				continue;
-			}
-			if(compare_strings(new_entry->first_name,temp->succ->first_name)==Smaller||compare_strings(new_entry->first_name,temp->succ->first_name)==Equal){
-				new_entry->succ=temp->succ;
-				temp->succ=new_entry;
-				break;
-			}
-		}
-		if(compare_strings(new_entry->last_name,temp->succ->last_name)==Smaller){
-			new_entry->succ = temp->succ;
+		if(is_smaller(new_node,temp->succ)){
+			new_entry->succ=temp->succ;
 			temp->succ=new_entry;
-			break;
 		}
 	}
 	temp->succ=new_entry;
 	return list;
 }
-
+/* < */
+int is_smaller(struct node* p1, struct node* p2) {
+	if(compare_strings(p1->last_name, p2->last_name) == Smaller) return 1;
+	if(compare_strings(p1->first_name, p2->first_name) == Smaller) return 1;
+	return 0;
+}
 /*
 int main(){
 	struct node* a1 = new_node();
