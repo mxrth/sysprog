@@ -19,7 +19,7 @@ int main(void) {
 
     print_list(list);
 
-    /*free_list(list);*/
+    free_list(list);
 
     return EXIT_SUCCESS;
 }

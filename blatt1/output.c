@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 void print_list(const struct node* person) {
-    for(;person->succ != NULL;person = person->succ) {
+    for(;person != NULL;person = person->succ) {
 	printf("%s %s\n", person->first_name, person->last_name);
     }
 }

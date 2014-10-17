@@ -17,17 +17,12 @@ void free_node(struct node* node){
 }
 
 void free_list(struct node* list){
-	struct node* temp = list;
-	struct node* clear;
-	while(temp->succ!=NULL){
-		clear = temp;
-		
-	
-	
-	}
-	
-	
-	return;
+    struct node *to_free, *succ;
+    while(list != NULL) {
+	succ = list->succ;
+	free_node(list);
+	list = succ;
+    }
 }
 
 /* < */
