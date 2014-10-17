@@ -29,7 +29,7 @@ size_t string_copy(const char* src, char* dest, size_t dest_size) {
 	src++; dest++;
 	copied++;
     }
-    /*after the while dest points one past the last copied char*/
+    /*after the loop dest points one past the last copied char*/
     *dest = '\0';
     return copied;
 }
@@ -53,9 +53,10 @@ struct node *read_name(FILE* fp) {
     
     if(result < 2 || result == EOF) return NULL;
 
-    firstname_size = string_len(first_name);
-    lastname_size = string_len(last_name);
+    firstname_size = string_len(first_name)+1;
+    lastname_size = string_len(last_name)+1;
     
+
     /* allocate some stuff */
     person = new_node();
     if(!person) return NULL;
@@ -63,8 +64,8 @@ struct node *read_name(FILE* fp) {
     ALLOC_OR(person->first_name, firstname_size) return NULL;
     ALLOC_OR(person->last_name, lastname_size) return NULL;
 
-    string_copy(last_name, person->first_name, firstname_size);
-    string_copy(first_name, person->last_name, lastname_size);
+    string_copy(first_name, person->first_name, firstname_size);
+    string_copy(last_name, person->last_name, lastname_size);
 
 
     return person;
