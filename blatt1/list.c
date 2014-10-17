@@ -48,7 +48,7 @@ struct node * insert_sorted(struct node* list, struct node* new_entry){
 			break;
 		}
 	}
-	temp->succ=new_node;
+	temp->succ=new_entry;
 	return list;
 }
 
