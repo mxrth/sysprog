@@ -5,7 +5,7 @@
 
 struct node* new_node(){
 	struct node *new_pointer = malloc(sizeof(struct node));
-	new_pointer->succ==NULL;
+	new_pointer->succ=NULL;
 	return new_pointer;
 }
 
@@ -70,9 +70,11 @@ int main(){
 	struct node* list = NULL;
 	
 	a1->*(last_name) = "Hallo";
-	a1->*(last_name) = "Hallo";
-	a1->*(last_name) = "Hallo";
-	a1->*(last_name) = "Hallo";
-	a1->*(last_name) = "Hallo";
-	a1->*(last_name) = "Hallo";
+	a1->*(first_name) = "Hallo";
+	a2->*(last_name) = "Hallo";
+	a2->*(first_name) = "Hallo";
+	a3->*(last_name) = "Hallo";
+	a3->*(first_name) = "Hallo";
+	
+	list = 
 } */
