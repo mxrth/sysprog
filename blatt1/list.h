@@ -16,7 +16,7 @@ struct node{
  * The list can be empty, then the new_node will be inserted at the first position
  * If there are already elements in the list, the new_entry will be inserted such that the list is alphabetically ordered by last name.
  * If there are two people with the same last_name the first_name is the next  for sorting.
- * If there are two people with the same first_name and last_name the position doesn't matter. 
+ * If there are two people with the same first_name and last_name the position will be before the first occurrence of duplicates. 
  */
 struct node * insert_sorted(struct node* list, struct node* new_entry);
 
