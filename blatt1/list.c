@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "list.h"
 #include "mystring.h"
 
@@ -6,7 +7,7 @@ struct node* new_node(){
 	return new_pointer;
 }
 
-void free_node(struct node*){
+void free_node(struct node* node){
 	free(node->last_name);
 	free(node->first_name);
 	free(node);
@@ -33,8 +34,8 @@ struct node * insert_sorted(struct node* list, struct node* new_entry){
 			if(compare_strings(new_entry->first_name,temp->succ->last_name)==Greater){
 				continue;
 			}
-			if(compare_strings(new_entry->first_name,temp->first_name)==Smaller||compare_strings(new_entry->first_name,temp->first_name)==Equal){
-				new_node->succ=temp->succ;
+			if(compare_strings(new_entry->first_name,temp->succ->first_name)==Smaller||compare_strings(new_entry->first_name,temp->succ->first_name)==Equal){
+				new_entry->succ=temp->succ;
 				temp->succ=new_entry;
 				break;
 			}
