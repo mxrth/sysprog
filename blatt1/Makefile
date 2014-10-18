@@ -6,6 +6,12 @@ OBJECTS = main.o input.o output.o list.o mystring.o
 
 EXECUTABLE = person_list
 
+CLANG_SANITIZE_FLAGS = -fsanitize=address,integer,undefined
+
+ifdef SANITIZE
+CFLAGS += $(CLANG_SANITIZE_FLAGS)
+endif
+
 $(EXECUTABLE): input.o output.o main.o output.o list.o mystring.o
 	$(CC) $(CFLAGS) -o person_list $(OBJECTS)
 
