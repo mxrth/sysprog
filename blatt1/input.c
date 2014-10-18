@@ -25,13 +25,13 @@
 #include <stdio.h>
 
 /*
- * Allocates space for num objects of type *dest and stores the resulting pointer to dest
+ * Allocates space for num objects of type `*dest` and stores the resulting pointer to `dest`
  * Iff an error is encountered the statement after ALLOC_OR is executed
  * Use like this:
  * ALLOC_OR(person, 15) { 
  *  panic(); 
  *  error(); 
- *  fuck();
+ *  ohnoes();
  * }
  */
 #define ALLOC_OR(dest, num) if(!( (dest) = calloc(num, sizeof( *(dest) )) ))
@@ -47,18 +47,18 @@
  */
 struct node *read_name(FILE* file) {
 
-    /* used _size (and not for example _len) suffixto make clear these variables should hold the size 
+    /* used _size (and not for example _len) suffix to make clear these variables should hold the size 
      * of the _buffer_ holding firstname/lastname not the length of the string */
     size_t firstname_size, lastname_size;
     char first_name[101], last_name[101];
     struct node* person;
     int result;
 
-    /*scanning might yield suprising results when one of the assumptions is broken,
+    /* scanning might yield suprising results when one of the assumptions is broken,
      * but should be safe in any case */
     result = fscanf(file, "%100s %100s", first_name, last_name);
     
-    /*fscanf returns how many parameters were filled, or EOF on error*/
+    /*`fscanf` returns how many parameters were filled, or `EOF` on error*/
     if(result < 2 || result == EOF) return NULL;
 
     /*buffer must be one `char` bigger than the length of the string to hold the terminationg '\0'*/
@@ -85,7 +85,7 @@ FILE *get_input_file(void) {
     scanf("%255s", path);
     return fopen(path, "r");
     /* Interesting sidenote: clang with -fsanitize=... found the possible bug when path was
-     * declared with `char path[255] _even_ when entering fewer than 255 chars*/
+     * declared with `char path[255]` _even_ when entering fewer than 255 chars*/
 }
 
 
