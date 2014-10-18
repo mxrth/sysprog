@@ -19,11 +19,6 @@ enum Ordering {
  */
 enum Ordering compare_strings(const char* a, const char* b);
 
-/*
- * Returns a pointer to the first occurrence of `needle` in `haystack`, NULL if it is not present.
- */
-char *find_char(const char * haystack, char needle);
-
 /* 
  * Calculates the length of a given char
  * Assumes it is null terminated
