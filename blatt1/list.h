@@ -23,7 +23,7 @@ struct node * insert_sorted(struct node* list, struct node* new_entry);
 /*
  * Allocates memory for a new struct node and returns a pointer on the allocated memory.
  */
-struct node * new_node();
+struct node * new_node(void);
 
 /*
  * Prints the list.

@@ -3,6 +3,8 @@
 #include "list.h"
 #include "mystring.h"
 
+int is_smaller(struct node* p1, struct node* p2); 
+
 struct node* new_node(){
 	struct node *new_pointer = malloc(sizeof(struct node));
 	new_pointer->succ=NULL;
@@ -60,29 +62,3 @@ struct node * insert_sorted(struct node* list, struct node* new_entry){
 	return list;
 }
 
-/*
-int main(){
-	struct node* a1 = new_node();
-	struct node* a2 = new_node();
-	struct node* a3 = new_node();
-	if(a1==NULL || a2 == NULL || a3 ==NULL){
-		printf("ERROR");
-		return EXIT_FAILURE;
-	}
-	a1->last_name = malloc(100*sizeof(char));
-	a1->first_name = malloc(100*sizeof(char));
-	a2->last_name = malloc(100*sizeof(char));
-	a2->first_name = malloc(100*sizeof(char));
-	a3->last_name = malloc(100*sizeof(char));
-	a3->first_name = malloc(100*sizeof(char));
-	struct node* list = NULL;
-	
-	a1->*(last_name) = "Hallo";
-	a1->*(first_name) = "Hallo";
-	a2->*(last_name) = "Hallo";
-	a2->*(first_name) = "Hallo";
-	a3->*(last_name) = "Hallo";
-	a3->*(first_name) = "Hallo";
-	
-	list = 
-} */
