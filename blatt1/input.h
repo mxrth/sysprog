@@ -2,7 +2,6 @@
 #define _INPUT_H
 
 #include <stdio.h>
-#include "mystring.h"
 #include "list.h"
 
 /*
