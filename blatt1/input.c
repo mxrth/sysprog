@@ -13,6 +13,7 @@
  * NULL
  */
 #include <stdlib.h>
+
 /*
  * Needed for:
  * fscanf
@@ -47,7 +48,7 @@
  */
 struct node *read_name(FILE* file) {
 
-    /* used _size (and not for example _len) suffixto make clear these variables should hold the size 
+    /* used _size (and not for example _len) suffix to make clear these variables should hold the size 
      * of the _buffer_ holding firstname/lastname not the length of the string */
     size_t firstname_size, lastname_size;
     char first_name[101], last_name[101];

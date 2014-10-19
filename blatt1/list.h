@@ -12,6 +12,12 @@ struct node{
 };
 
 /*
+ * This compares two structs and acts as the "<"-relation
+ * p1 < p2 iff (p1->last_name < p2-last_name) or (p1->last_name = p2-last_name and p1->first_name < p2-first_name)
+ */
+int is_smaller(struct node* p1, struct node* p2);
+
+/*
  * This function can insert a struct node, that is already filled with the names, at the right place in a list
  * The list can be empty, then the new_node will be inserted at the first position
  * If there are already elements in the list, the new_entry will be inserted such that the list is alphabetically ordered by last name.
