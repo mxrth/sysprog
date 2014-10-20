@@ -2,7 +2,7 @@ CFLAGS = -Wall -Wextra --std=c99 --pedantic -g3
 
 CC = gcc
 
-OBJECTS = main.o springerproblem.o 
+OBJECTS = springerproblem.o brett.o 
 
 EXECUTABLE = springer
 
@@ -22,9 +22,9 @@ $(EXECUTABLE): $(OBJECTS)
 
 #These can be made with implicit rules, only the dependencies are specified
 
-main.o: main.c brett.h output.h
+springerproblem.o: springerproblem.c brett.h output.h
 
-
+brett.o : brett.c brett.h
 
 .PHONY: clean
 clean:

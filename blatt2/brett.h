@@ -11,9 +11,6 @@ int init_brett(struct t_brett *b, int n, int x, int y);
 /*Allokiert Speicher für das Feld*/
 int** allocate_feld(int n);
 
-/*Initialisierung des Feldes*/
-int** felder
-
 /* Bewegt Springer um x Felder in die Horizontalen und um y Felder in der Vertikalen.
 Berechnet die neue Position und markiert das entsprechende Feld als besucht*/
 int neuer_sprung(struct t_brett *b, int x, int y);
