@@ -1,3 +1,6 @@
+#ifndef __BRETT_H_
+#define __BRETT_H_
+
 /*Definition des Schachfeldes*/
 struct t_brett{
  int** felder;
@@ -26,3 +29,5 @@ int besuchte_felder(struct t_brett *b);
 
 /*Gibt reservierten Speicher wieder frei*/
 void loesche_brett(struct t_brett *b);
+
+#endif

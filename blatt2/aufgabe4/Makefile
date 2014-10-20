@@ -4,7 +4,7 @@ CC = gcc
 
 OBJECTS = springerproblem.o brett.o 
 
-EXECUTABLE = springer
+EXECUTABLE = springerproblem
 
 CLANG_SANITIZE_FLAGS = -fsanitize=address,integer,undefined
 
