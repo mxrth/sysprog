@@ -1,4 +1,5 @@
 #include "brett.h"
+#include "output.h"
 #include <stdlib.h>
 #include <stdio.h>
 
