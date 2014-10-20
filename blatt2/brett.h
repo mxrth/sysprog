@@ -27,9 +27,5 @@ int frei(struct t_brett *b, int x, int y);
 /*Liefert Anzahl an Feldern, die schon vom Springer besucht worden sind*/
 int besuchte_felder(struct t_brett *b);
 
-/*gibt aktuelles Schachbrett aus */
-void print(struct t_brett *b);
-
-
 /*Gibt reservierten Speicher wieder frei*/
 void loesche_brett(struct t_brett *b);
