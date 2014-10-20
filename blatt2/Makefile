@@ -22,7 +22,7 @@ $(EXECUTABLE): $(OBJECTS)
 
 #These can be made with implicit rules, only the dependencies are specified
 
-main.o: main.c brett.h
+main.o: main.c brett.h output.h
 
 
 
