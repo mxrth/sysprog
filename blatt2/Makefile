@@ -1,10 +1,10 @@
 CFLAGS = -Wall -Wextra --std=c99 --pedantic -g3  
 
-CC = clang
+CC = gcc
 
-OBJECTS = main.o input.o output.o list.o mystring.o 
+OBJECTS = main.o springerproblem.o 
 
-EXECUTABLE = person_list
+EXECUTABLE = springer
 
 CLANG_SANITIZE_FLAGS = -fsanitize=address,integer,undefined
 
@@ -17,12 +17,12 @@ ifeq ($(CC), clang)
 CFLAGS += -Weverything
 endif
 
-$(EXECUTABLE): 
+$(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(OBJECTS)
 
 #These can be made with implicit rules, only the dependencies are specified
 
-main.o: main.c input.h list.h 
+main.o: main.c brett.h
 
 
 
