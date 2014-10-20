@@ -1,4 +1,15 @@
+/*Definition des Schachfeldes*/
+struct t_brett{
+ int** felder;
+ int dimension;
+};
 
+/*Führt Initialisierung des Schachbrettes durch ( Übergabe per Zeiger als 1.Parameter) 
+Ruft allocate_feld auf. Markiert Startposition im Feld.*/
+int init_brett(struct t_brett *b, int n, int x, int y);
+
+/*Allokiert Speicher für das Feld*/
+int** allocate_feld(int n);
 
 /*Initialisierung des Feldes*/
 int** felder
@@ -19,8 +30,6 @@ int besuchte_felder(struct t_brett *b);
 /*gibt aktuelles Schachbrett aus */
 void print(struct t_brett *b);
 
-/*Führt Initialisierung des Schachbrettes durch ( Übergabe per Zeiger als 1.Parameter) */
-int init_brett(struct t_brett *b, int n, int x, int y);
 
 /*Gibt reservierten Speicher wieder frei*/
 void loesche_brett(struct t_brett *b);
