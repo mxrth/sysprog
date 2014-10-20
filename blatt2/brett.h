@@ -7,7 +7,7 @@ int** felder
 Berechnet die neue Position und markiert das entsprechende Feld als besucht*/
 int neuer_sprung(struct t_brett *b, int x, int y);
 
-/*Macht den Sprung (X,y) rückgängig und entfernt die Markierung */
+/*Macht den Sprung (x,y) rückgängig und entfernt die Markierung */
 int entferne_sprung(struct t_brett *b, int x, int y);
 
 /*Liefert Wert ob das Feld noch besucht werden kann*/
