@@ -8,10 +8,12 @@ struct t_brett{
 };
 
 /*Führt Initialisierung des Schachbrettes durch ( Übergabe per Zeiger als 1.Parameter) 
-Ruft allocate_feld auf. Markiert Startposition im Feld.*/
+Ruft allocate_feld auf. Markiert Startposition im Feld. Gibt 0 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
 int init_brett(struct t_brett *b, int n, int x, int y);
 
-/*Allokiert Speicher für das Feld*/
+/*Allokiert Speicher für das Feld
+Gibt NULL zurueck, wenn in einem Schritt kein Speicher allokiert werden konnte
+*/
 int** allocate_feld(int n);
 
 /* Bewegt Springer um x Felder in die Horizontalen und um y Felder in der Vertikalen.
