@@ -3,6 +3,7 @@
  */
 #include <stdlib.h>
 #include "brett.h"
+#include <stdio.h>
 
 /*Erzeugt das int-array
  *Gibt NULL zurueck, wenn in einem Schritt kein Speicher allokiert werden konnte
@@ -26,7 +27,7 @@ int** allocate_feld(int n){
 Ruft allocate_feld auf. Markiert Startposition im Feld. Gibt 0 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
 int init_brett(struct t_brett *b, int n, int x, int y){
 	(*b).felder = allocate_feld(n);
-	if(*b != NULL) {
+	if((*b).felder != NULL) {
 	(*b).felder[x][y] = 1;
 	return 1;
 	}
