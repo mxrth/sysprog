@@ -47,5 +47,6 @@ int main() {
 	int a = besuchte_felder(&b);
 	printf("Besuchte Felder: %i \n",a);
 
+	loesche_brett(&b);
 	return 0;
 }

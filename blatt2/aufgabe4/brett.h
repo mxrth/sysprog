@@ -3,8 +3,10 @@
 
 /*Definition des Schachfeldes*/
 struct t_brett{
- int** felder;
- int dimension;
+	int** felder;
+	int dimension;
+	int pos_x;
+	int pos_y;
 };
 
 /*Führt Initialisierung des Schachbrettes durch.
