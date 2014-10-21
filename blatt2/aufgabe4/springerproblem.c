@@ -1,7 +1,7 @@
-#include "brett.h"
-#include "output.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "brett.h"
+#include "output.h"
 
 int n = 5;
 int start_x = 1;
@@ -26,7 +26,7 @@ void setze_springer(struct t_brett *b)
   if (besuchte_felder(b)>= n*n) {
 	printf("Loesung %i\n", lsgnr);
     lsgnr++;
-    print(b);
+    print_brett(b);
     printf("\n");
   }
   else {

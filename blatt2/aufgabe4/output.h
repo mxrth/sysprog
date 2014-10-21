@@ -1,6 +1,10 @@
 #ifndef __OUTPUT_H_
 #define __OUTPUT_H_
 
+/*Benoetigt fuer:
+ *struct t_brett
+ *
+ */
 #include "brett.h"
 
 /*gibt aktuelles Schachbrett aus */

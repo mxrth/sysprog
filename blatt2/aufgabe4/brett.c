@@ -2,8 +2,14 @@
  *malloc
  */
 #include <stdlib.h>
-#include "brett.h"
+
+/*Wofuer brauchen wir das?*/
 #include <stdio.h>
+
+/*Benoetigt fuer:
+ *struct t_brett
+ */
+#include "brett.h"
 
 /*Erzeugt das int-array
  *Gibt NULL zurueck, wenn in einem Schritt kein Speicher allokiert werden konnte

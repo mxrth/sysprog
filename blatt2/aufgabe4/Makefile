@@ -26,6 +26,8 @@ springerproblem.o: springerproblem.c brett.h output.h
 
 brett.o : brett.c brett.h
 
+output.o : output.c output.h
+
 .PHONY: clean
 clean:
 	-rm -f $(OBJECTS) $(EXECUTABLE)
