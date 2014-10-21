@@ -24,16 +24,18 @@ int** allocate_feld(int n){
 }
 
 /*Führt Initialisierung des Schachbrettes durch.
-Ruft allocate_feld auf und übergibt die Dimension des Feldes. Markiert Startposition im Feld. Gibt 0 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
-int init_brett(struct t_brett *b, int n, int x, int y){
-	(*b).felder = allocate_feld(n);
+Ruft allocate_feld auf und übergibt die Dimension des Feldes. Ruft fill_brett auf und setzt alle Felder auf 0. Markiert Startposition im Feld. Gibt 0 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
+int init_brett(struct t_brett *b, int n, int x, int y) {
 	(*b).dimension = n;
-	if((*b).felder != NULL) {
-	(*b).felder[x][y] = 1;
-	return 1;
+	(*b).felder = allocate_feld(n);
+	if ((*b).felder == NULL) {
+		return 1;
 	}
+	fill_brett(b, 0);
+	(*b).felder[x][y] = 1;
 	return 0;
 }
+
 
 
 /* Bewegt Springer um x Felder in die Horizontalen und um y Felder in der Vertikalen.
@@ -52,7 +54,22 @@ int frei(struct t_brett *b, int x, int y) {
 }
 
 /*Liefert Anzahl an Feldern, die schon vom Springer besucht worden sind*/
-int besuchte_felder(struct t_brett *b);
+int besuchte_felder(struct t_brett *b) {
+	int zaehler = 0;
+	int i;
+	int j;
+	int n = (*b).dimension;
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < n; j++) {
+			if ((((*b).felder)[i][j]) > 0) {
+				zaehler++;
+			}
+			j++;
+		}
+		i++;
+	}
+	return zaehler;
+}
 
 /*Gibt reservierten Speicher wieder frei*/
 void loesche_brett(struct t_brett *b);

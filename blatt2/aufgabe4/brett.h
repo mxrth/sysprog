@@ -7,8 +7,8 @@ struct t_brett{
  int dimension;
 };
 
-/*Führt Initialisierung des Schachbrettes durch ( Übergabe per Zeiger als 1.Parameter)
-Ruft allocate_feld auf. Markiert Startposition im Feld. Gibt 0 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
+/*Führt Initialisierung des Schachbrettes durch.
+Ruft allocate_feld auf und übergibt die Dimension des Feldes. Ruft fill_brett auf und setzt alle Felder auf 0. Markiert Startposition im Feld. Gibt 0 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
 int init_brett(struct t_brett *b, int n, int x, int y);
 
 /*Allokiert Speicher für das Feld
