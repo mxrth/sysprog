@@ -35,7 +35,10 @@ int** allocate_feld(int n){
 }
 
 /*Führt Initialisierung des Schachbrettes durch.
-Ruft allocate_feld auf und übergibt die Dimension des Feldes. Ruft fill_brett auf und setzt alle Felder auf 0. Markiert Startposition im Feld. Gibt 0 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
+ *Ruft allocate_feld auf und übergibt die Dimension des Feldes. 
+ *Ruft fill_brett auf und setzt alle Felder auf 0.
+ *Markiert Startposition im Feld. 
+ *Gibt 1 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
 int init_brett(struct t_brett *b, int n, int x, int y) {
 	(*b).dimension = n;
 	(*b).felder = allocate_feld(n);
@@ -89,7 +92,7 @@ void loesche_brett(struct t_brett *b);
 /*Assumptions:
  *brett ist ein pointer auf eine struct t_brett, in dieser Struct ist bereits Speicher fuer das int-array allokiert
  *
- *
+ *Result: Schreibt den Wert von a in alle Felder der Matrix
  */
 int fill_brett(struct t_brett* brett, int a){
 	int i,j;
