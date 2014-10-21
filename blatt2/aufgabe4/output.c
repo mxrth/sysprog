@@ -19,7 +19,9 @@ void print_brett(struct t_brett *b){
 	int i;
 	for(i=0;i<b->dimension;i++){
 		print_seperating_line(b->dimension);
+		printf("\n");
 		print_array_line(b, i);
+		printf("\n");
 	}
 	print_seperating_line(b->dimension);
 	return;
