@@ -24,9 +24,10 @@ int** allocate_feld(int n){
 }
 
 /*Führt Initialisierung des Schachbrettes durch.
-Ruft allocate_feld auf. Markiert Startposition im Feld. Gibt 0 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
+Ruft allocate_feld auf und übergibt die Dimension des Feldes. Markiert Startposition im Feld. Gibt 0 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
 int init_brett(struct t_brett *b, int n, int x, int y){
 	(*b).felder = allocate_feld(n);
+	(*b).dimension = n;
 	if((*b).felder != NULL) {
 	(*b).felder[x][y] = 1;
 	return 1;
