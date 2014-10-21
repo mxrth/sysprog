@@ -16,6 +16,9 @@ Gibt NULL zurueck, wenn in einem Schritt kein Speicher allokiert werden konnte
 */
 int** allocate_feld(int n);
 
+/*Fuellt das Brett komplett mit dem Wert spzifieziert in der Variable a*/
+int fill_brett(struct t_brett* brett, int a);
+
 /* Bewegt Springer um x Felder in die Horizontalen und um y Felder in der Vertikalen.
 Berechnet die neue Position und markiert das entsprechende Feld als besucht*/
 int neuer_sprung(struct t_brett *b, int x, int y);

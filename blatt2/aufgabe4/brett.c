@@ -56,3 +56,18 @@ int besuchte_felder(struct t_brett *b);
 
 /*Gibt reservierten Speicher wieder frei*/
 void loesche_brett(struct t_brett *b);
+/*Assumptions:
+ *brett ist ein pointer auf eine struct t_brett, in dieser Struct ist bereits Speicher fuer das int-array allokiert
+ *
+ *
+ */
+int fill_brett(struct t_brett* brett, int a){
+	int i,j;
+	for(i=0;i<brett->dimension;i++){
+		for(j=0;j<brett->dimension;j++){
+			brett->felder[i][j] = a;
+		}
+	}
+	return 0;
+}
+
