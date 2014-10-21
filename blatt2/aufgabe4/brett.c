@@ -78,9 +78,7 @@ int besuchte_felder(struct t_brett *b) {
 			if ((((*b).felder)[i][j]) > 0) {
 				zaehler++;
 			}
-			j++;
 		}
-		i++;
 	}
 	return zaehler;
 }
