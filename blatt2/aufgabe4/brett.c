@@ -73,6 +73,7 @@ int besuchte_felder(struct t_brett *b) {
 
 /*Gibt reservierten Speicher wieder frei*/
 void loesche_brett(struct t_brett *b);
+
 /*Assumptions:
  *brett ist ein pointer auf eine struct t_brett, in dieser Struct ist bereits Speicher fuer das int-array allokiert
  *
