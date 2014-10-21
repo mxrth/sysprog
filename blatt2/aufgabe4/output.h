@@ -1,8 +1,10 @@
 #ifndef __OUTPUT_H_
 #define __OUTPUT_H_
 
+#include "brett.h"
+
 /*gibt aktuelles Schachbrett aus */
-void print(struct t_brett *b);
+void print_brett(struct t_brett *b);
 
 /*Assumption: n is an integer > 1
  *
