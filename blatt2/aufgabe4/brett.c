@@ -21,3 +21,12 @@ int** allocate_feld(int n){
 	}
 	return feld;
 }
+
+int init_brett(struct t_brett *b, int n, int x, int y){
+	(&b).felder = allocate_feld(n);
+	if(&b != NULL) {
+	(&b).felder[x][y] = 1;
+	return 1;
+	}
+	return 0;
+}
