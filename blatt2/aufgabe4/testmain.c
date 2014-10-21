@@ -1,21 +1,13 @@
-/*
- * testmain.c
- *
- *  Created on: 21.10.2014
- *      Author: claire
- */
-
-
 #include <stdlib.h>
-#include "brett.h"
 #include <stdio.h>
+#include "brett.h"
 
 int main() {
 
 	struct t_brett b;
 	int n = 4;
-	int x =3;
-	int y =2;
+	int x = 3;
+	int y = 2;
 	int ergebnis;
 
 	/*Test für init_brett und allocate*/
@@ -23,10 +15,10 @@ int main() {
 	ergebnis = init_brett(&b,n,x,y);
 
 	if(ergebnis == 1){
-		printf("Es hat leider nicht geklappt\n");
+		printf("MEMORY ERROR\n");
 	}
 	else{
-		printf("läuft\n");
+		printf("Speicher allokiert\n");
 	}
 
 	ergebnis = frei(&b, 1, 1);

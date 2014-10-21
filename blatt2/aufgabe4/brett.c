@@ -11,6 +11,11 @@
  */
 #include "brett.h"
 
+/*Benoetigt fuer:
+ *print_brett
+ */
+#include "output.h"
+
 /*Erzeugt das int-array
  *Gibt NULL zurueck, wenn in einem Schritt kein Speicher allokiert werden konnte
  */
@@ -37,8 +42,11 @@ int init_brett(struct t_brett *b, int n, int x, int y) {
 	if ((*b).felder == NULL) {
 		return 1;
 	}
+	print_brett(b);
 	fill_brett(b, 0);
-	(*b).felder[x-1][y-1] = 1;
+	print_brett(b);
+	(*b).felder[x][y] = 1;
+	print_brett(b);
 	return 0;
 }
 
@@ -53,10 +61,10 @@ int entferne_sprung(struct t_brett *b, int x, int y);
 
 /*Liefert Wert ob das Feld noch besucht werden kann*/
 int frei(struct t_brett *b, int x, int y) {
-	if((*b).felder[x][y] >0) {
+	if((*b).felder[x][y] > 0) {
 		return 0;
 	}
-		return 1;
+	else return 1;
 }
 
 /*Liefert Anzahl an Feldern, die schon vom Springer besucht worden sind*/

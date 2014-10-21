@@ -24,6 +24,7 @@ void print_brett(struct t_brett *b){
 		printf("\n");
 	}
 	print_seperating_line(b->dimension);
+	printf("\n\n");
 	return;
 }
 
