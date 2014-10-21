@@ -32,7 +32,7 @@ int init_brett(struct t_brett *b, int n, int x, int y) {
 		return 1;
 	}
 	fill_brett(b, 0);
-	(*b).felder[x][y] = 1;
+	(*b).felder[x-1][y-1] = 1;
 	return 0;
 }
 
