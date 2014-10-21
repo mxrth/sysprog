@@ -64,7 +64,7 @@ int entferne_sprung(struct t_brett *b, int x, int y);
 
 /*Liefert Wert ob das Feld noch besucht werden kann. Liefert 0, wenn Feld besetzt ist oder nicht existiert.*/
 int frei(struct t_brett *b, int x, int y) {
-
+	int n = b->dimension;
 	if((*b).felder[x][y] > 0 || x>=n || y>=n || x<0 || y<0) {
 		return 0;
 	}

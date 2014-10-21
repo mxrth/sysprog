@@ -5,7 +5,7 @@
 int main() {
 
 	struct t_brett b;
-	int n = 4;
+	int n = 20;
 	int x = 3;
 	int y = 2;
 	int ergebnis;
