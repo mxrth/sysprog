@@ -2,7 +2,7 @@ CFLAGS = -Wall -Wextra --std=c99 --pedantic -g3
 
 CC = gcc
 
-OBJECTS = springerproblem.o brett.o 
+OBJECTS = springerproblem.o brett.o sprung.o output.o
 
 EXECUTABLE = springerproblem
 
@@ -27,6 +27,8 @@ springerproblem.o: springerproblem.c brett.h output.h
 brett.o : brett.c brett.h
 
 output.o : output.c output.h
+
+sprung.o: sprung.c brett.h
 
 .PHONY: clean
 clean:
