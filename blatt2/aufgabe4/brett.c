@@ -40,6 +40,7 @@ int** allocate_feld(int n){
  *Markiert Startposition im Feld. 
  *Gibt 1 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
 int init_brett(struct t_brett *b, int n, int x, int y) {
+	x=x-1; y= y-1;
 	(*b).dimension = n;
 	(*b).felder = allocate_feld(n);
 	if ((*b).felder == NULL) {
@@ -49,18 +50,13 @@ int init_brett(struct t_brett *b, int n, int x, int y) {
 	fill_brett(b, 0);
 	print_brett(b);
 	(*b).felder[x][y] = 1;
+	b->pos_x = x;
+	b->pos_y = y;
 	print_brett(b);
 	return 0;
 }
 
 
-
-/* Bewegt Springer um x Felder in die Horizontalen und um y Felder in der Vertikalen.
-Berechnet die neue Position und markiert das entsprechende Feld als besucht*/
-int neuer_sprung(struct t_brett *b, int x, int y);
-
-/*Macht den Sprung (x,y) rückgängig und entfernt die Markierung */
-int entferne_sprung(struct t_brett *b, int x, int y);
 
 /*Liefert Wert ob das Feld noch besucht werden kann. Liefert 0, wenn Feld besetzt ist oder nicht existiert.*/
 int feld_frei(struct t_brett *b, int x, int y) {
@@ -75,6 +71,12 @@ int frei(struct t_brett *b, int x, int y) {
     return feld_frei(b, b->pos_x + x, b->pos_y + y);
 }
 
+
+int besuchte_felder(struct t_brett *b) {
+    return CUR_FELD(b); 
+}
+
+#if 0
 /*Liefert Anzahl an Feldern, die schon vom Springer besucht worden sind*/
 int besuchte_felder(struct t_brett *b) {
 	int zaehler = 0;
@@ -90,6 +92,7 @@ int besuchte_felder(struct t_brett *b) {
 	}
 	return zaehler;
 }
+#endif
 
 /*Gibt reservierten Speicher wieder frei*/
 void loesche_brett(struct t_brett *b){

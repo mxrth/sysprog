@@ -9,6 +9,12 @@ struct t_brett{
 	int pos_y;
 };
 
+/* Easy accesors */
+#define CUR_FELD(b) FELD_OFFSET(b, 0, 0)
+#define FELD_OFFSET(b, x, y) ( (b)->felder[(b)->pos_x + (x)][(b)->pos_y + y] )
+
+
+
 /*Führt Initialisierung des Schachbrettes durch.
  *Ruft allocate_feld auf und übergibt die Dimension des Feldes.
  *Ruft fill_brett auf und setzt alle Felder auf 0.

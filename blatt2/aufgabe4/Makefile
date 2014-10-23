@@ -30,6 +30,7 @@ output.o : output.c output.h
 
 sprung.o: sprung.c brett.h
 
+
 .PHONY: clean
 clean:
 	-rm -f $(OBJECTS) $(EXECUTABLE)
