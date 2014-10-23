@@ -35,6 +35,8 @@ int neuer_sprung(struct t_brett *b, int x, int y);
 int entferne_sprung(struct t_brett *b, int x, int y);
 
 /*Liefert Wert ob das Feld noch besucht werden kann*/
+/*FALSCH SPEZIFIZIERT IN AUFGABENSTELLUNG:
+ * _soll_ überprüfen ob der SPRUNG (x, y) noch frei ist m) */
 int frei(struct t_brett *b, int x, int y);
 
 /*Liefert Anzahl an Feldern, die schon vom Springer besucht worden sind*/

@@ -45,7 +45,7 @@ int init_brett(struct t_brett *b, int n, int x, int y) {
 	if ((*b).felder == NULL) {
 		return 1;
 	}
-	print_brett(b);
+	//print_brett(b);
 	fill_brett(b, 0);
 	print_brett(b);
 	(*b).felder[x][y] = 1;
@@ -63,12 +63,16 @@ int neuer_sprung(struct t_brett *b, int x, int y);
 int entferne_sprung(struct t_brett *b, int x, int y);
 
 /*Liefert Wert ob das Feld noch besucht werden kann. Liefert 0, wenn Feld besetzt ist oder nicht existiert.*/
-int frei(struct t_brett *b, int x, int y) {
+int feld_frei(struct t_brett *b, int x, int y) {
 	int n = b->dimension;
 	if(x>=n || y>=n || x<0 || y<0 || b->felder[x][y] > 0)  {
 		return 0;
 	}
 	else return 1;
+}
+
+int frei(struct t_brett *b, int x, int y) {
+    return feld_frei(b, b->pos_x + x, b->pos_y + y);
 }
 
 /*Liefert Anzahl an Feldern, die schon vom Springer besucht worden sind*/
