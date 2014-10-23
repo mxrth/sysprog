@@ -1,0 +1,8 @@
+# ignore object files
+*.o
+
+*.exe
+
+#ignore the final progran
+springerproblem
+
