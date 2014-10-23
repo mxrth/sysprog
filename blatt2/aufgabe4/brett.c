@@ -40,7 +40,10 @@ int** allocate_feld(int n){
  *Markiert Startposition im Feld. 
  *Gibt 1 zurück, wenn Initialisierung nicht durchgeführt werden konnte*/
 int init_brett(struct t_brett *b, int n, int x, int y) {
-	x=x-1; y= y-1;
+	/* brett Koordinaten starten bei (1,1), vgl. Mail */
+	x -= 1;
+	y -= 1;
+
 	(*b).dimension = n;
 	(*b).felder = allocate_feld(n);
 	if ((*b).felder == NULL) {
@@ -76,23 +79,6 @@ int besuchte_felder(struct t_brett *b) {
     return CUR_FELD(b); 
 }
 
-#if 0
-/*Liefert Anzahl an Feldern, die schon vom Springer besucht worden sind*/
-int besuchte_felder(struct t_brett *b) {
-	int zaehler = 0;
-	int i;
-	int j;
-	int n = (*b).dimension;
-	for (i = 0; i < n; i++) {
-		for (j = 0; j < n; j++) {
-			if ((((*b).felder)[i][j]) > 0) {
-				zaehler++;
-			}
-		}
-	}
-	return zaehler;
-}
-#endif
 
 /*Gibt reservierten Speicher wieder frei*/
 void loesche_brett(struct t_brett *b){

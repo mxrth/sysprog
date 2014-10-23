@@ -40,3 +40,4 @@ void setze_springer(struct t_brett *b)
     }
   }
 }
+

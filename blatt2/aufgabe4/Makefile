@@ -1,6 +1,6 @@
 CFLAGS = -Wall -Wextra --std=c99 --pedantic -g3  
 
-CC = gcc
+CC = clang
 
 OBJECTS = springerproblem.o brett.o sprung.o output.o
 
@@ -12,10 +12,6 @@ ifdef SANITIZE
 CFLAGS += $(CLANG_SANITIZE_FLAGS) -O3
 endif
 
-ifeq ($(CC), clang)
-#More warnings!
-CFLAGS += -Weverything
-endif
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(OBJECTS)
