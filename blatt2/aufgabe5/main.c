@@ -19,14 +19,14 @@ int main(void) {
 	
 	
     while((person = read_name(in_file)) != NULL) {
-		list = insert_sorted(list, person, );
+		list = insert_sorted(list, person, &name_is_smaller);
     }
 
 	/*Print the sorted list of the names*/
-    print_list(list);
+    print_list(list, print_person);
 	
 	/*Clean up memory and close file*/
-    free_list(list);
+    free_list(list, &free_struct_person);
     fclose(in_file);
 
     return EXIT_SUCCESS;
