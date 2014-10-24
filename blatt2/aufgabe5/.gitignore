@@ -4,3 +4,5 @@
 #ignore the final progran
 
 person_list
+
+*.exe
