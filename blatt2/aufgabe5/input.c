@@ -73,7 +73,7 @@ struct person *read_name(FILE* file) {
      without passing it as a double ponter*/
     #define ALLOC_AND_COPY(source, dest) \
 	{ \
-	    size_t size = string_len(source); \
+	    size_t size = string_len(source)+1; \
 	    ALLOC_OR(dest, size) return NULL; /*the other reason: convient early returning*/ \
 	    string_copy(source, dest, size); \
 	}
