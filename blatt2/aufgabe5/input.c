@@ -1,7 +1,7 @@
 #include "input.h"
 
 /*
- * Need for:
+ * Needed for:
  * string_len
  * string_copy
  */
