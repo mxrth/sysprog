@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
-#include "mystring.h"
 
-struct node* new_node(){
-	struct node *new_pointer = malloc(sizeof(struct node));
+List new_node(){
+	List new_pointer = malloc(sizeof(*new_pointer));
 	if(new_pointer==NULL){
 		return NULL;
 	}
@@ -12,29 +11,26 @@ struct node* new_node(){
 	return new_pointer;
 }
 
-void free_list(struct node*, void (*free_node)(struct node *));{
-    struct node *succ;
-    while(list != NULL) {
-		succ = list->succ;
-		*free_node(list);
-		list = succ;
-    }
-}
-
-struct node * insert_sorted(struct node* list, struct node* new_entry){
-	struct node* temp = list;
+List insert_sorted(List list, void* new_data, int (*is_smaller)(void*, void*)){
+	List temp = list;
+	List new = new_node();
+	if(new == NULL){
+		return NULL;
+	}
+	new->data = new_data;
+	
 	/*
 	If the list is empty, insert the new element at the beginning
 	*/
 	if(list==NULL){
-		list=new_entry;
+		list=new;
 		return list;
 	}
 	
 	/*If new_entry is smaller than the first entry, modify the list-pointer*/
-	if(is_smaller(new_entry,temp)){
-		new_entry->succ = temp;
-		list = new_entry;
+	if((*is_smaller)(new->data,temp->data)){
+		new->succ = temp;
+		list = new;
 		return list;
 	}
 	
@@ -44,16 +40,37 @@ struct node * insert_sorted(struct node* list, struct node* new_entry){
 	This also handles the case of duplicate entries: the new one will be inserted after the last duplicate
 	*/
 	for(;temp->succ!=NULL;temp=temp->succ){
-		if(is_smaller(new_entry,temp->succ)){
-			new_entry->succ=temp->succ;
-			temp->succ=new_entry;
+		if((*is_smaller)(new->data,temp->succ->data)){
+			new->succ=temp->succ;
+			temp->succ=new;
 			return list;
 		}
 	}
 	
 	/*If the first steps fail the new entry has to be inserted at the end of the list*/
-	temp->succ=new_entry;
+	temp->succ=new;
 	
 	return list;
 }
+
+/*For output of the list in the console*/
+void print_list(List list, void (*print_entry(void*))){
+    List temp = list;
+	for(;temp != NULL;temp = temp->succ) {
+		(*print_entry)(list->data);
+    }
+	return;
+}
+
+void free_list(List list, void (*free_node)(void*)){
+    List succ;
+    while(list != NULL) {
+		succ = list->succ;
+		(*free_node)(list->data);
+		free(list);
+		list = succ;
+    }
+}
+
+
 
