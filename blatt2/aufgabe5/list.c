@@ -3,43 +3,23 @@
 #include "list.h"
 #include "mystring.h"
 
-int is_smaller(struct node* p1, struct node* p2); 
-
 struct node* new_node(){
 	struct node *new_pointer = malloc(sizeof(struct node));
+	if(new_pointer==NULL){
+		return NULL;
+	}
 	new_pointer->succ=NULL;
 	return new_pointer;
 }
 
-void free_node(struct node* node){
-	free(node->last_name);
-	free(node->first_name);
-	free(node);
-	return;
-}
-
-void free_list(struct node* list){
+void free_list(struct node*, void (*free_node)(struct node *));{
     struct node *succ;
     while(list != NULL) {
 		succ = list->succ;
-		free_node(list);
+		*free_node(list);
 		list = succ;
     }
 }
-
-
-/* < */
-int name_is_smaller(struct node* p1, struct node* p2) {
-	/*Compare first names*/
-	if(compare_strings(p1->last_name, p2->last_name) == Smaller) 
-		return 1;
-	/*If the first names are equal compare the last names*/
-	if(compare_strings(p1->last_name, p2->last_name) == Equal 
-	&& compare_strings(p1->first_name, p2->first_name) == Smaller) 
-		return 1;
-	return 0;
-}
-
 
 struct node * insert_sorted(struct node* list, struct node* new_entry){
 	struct node* temp = list;

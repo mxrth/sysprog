@@ -12,26 +12,6 @@ struct node{
 };
 
 /*
- *Struct for storing a date, seperated in day, month and year
- */
-struct date{
-	int day;
-	int month;
-	int year;
-};
-
-struct person{
-	char *first, *last, *address;
-	struct date;
-};
-
-/*
- * This compares two structs and acts as the "<"-relation
- * p1 < p2 iff (p1->last_name < p2-last_name) or (p1->last_name = p2-last_name and p1->first_name < p2-first_name)
- */
-int name_is_smaller(struct node* p1, struct node* p2);
-
-/*
  * This function can insert a struct node, that is already filled with the names, at the right place in a list
  * The list can be empty, then the new_node will be inserted at the first position
  * If there are already elements in the list, the new_entry will be inserted such that the list is alphabetically ordered by last name.
@@ -51,15 +31,9 @@ struct node * new_node(void);
 void print_list(const struct node*, void (*print_entry(struct node *)));
 
 /*
- *Frees the memory allocated for the node, including all the memory allocated for the first_name, last_name.
- */
-void free_node(struct node*);
-
-/*
  * Frees a list, including all the memory allocated for the structs and the elements of the structs.
  */
 void free_list(struct node*, void (*free_node)(struct node *));
-
 
 
 #endif
