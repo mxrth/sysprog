@@ -1,5 +1,7 @@
 #include "person.h"
 #include "mystring.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /*
  *Compairing criterion: name
@@ -32,14 +34,18 @@ int birthdate_is_smaller(struct person* p1, struct person* p2){
 	if(p1->date.year<p2->date.year){
 		return 1;
 	}
-	if(p1->date.year=p2->date.year && p1->date.month<p2->date.month){
+	if(p1->date.year==p2->date.year && p1->date.month<p2->date.month){
 		return 1;
 	}
-	if(p1->date.year=p2->date.year && p1->date.month=p2->date.month && p1->date.day<p2->date.day){
+	if(p1->date.year==p2->date.year && p1->date.month==p2->date.month && p1->date.day<p2->date.day){
 		return 1;
 	}
 	return 0;
 }
+
+void print_person(struct person* p){
+	
+};
 
 /*Assumptions: node is a valid struct person*
  *

@@ -19,7 +19,7 @@ struct person{
  * This compares two structs and acts as the "<"-relation
  * p1 < p2 iff (p1->last_name < p2-last_name) or (p1->last_name = p2-last_name and p1->first_name < p2-first_name)
  */
-int name_is_smaller(struct node* p1, struct node* p2);
+int name_is_smaller(struct person* p1, struct person* p2);
 
 int town_is_smaller(struct person* p1, struct person* p2);
 
