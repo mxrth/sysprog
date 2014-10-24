@@ -3,12 +3,12 @@
 #include "brett.h"
 #include "output.h"
 
-int n = 5;
-int start_x = 1;
-int start_y = 1;
+int n = 8	;
+int start_x = 3;
+int start_y = 4;
 int lsgnr = 1;
 int moves[8][2] = {{2,1}, {1,2}, {-2,1}, {-1,2}, {2,-1}, {1,-2}, {-2,-1}, {-1,-2}};
-struct t_brett b;
+struct t_brett b;	
 
 void setze_springer(struct t_brett *b);
 
