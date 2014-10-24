@@ -25,6 +25,8 @@ int town_is_smaller(struct person* p1, struct person* p2);
 
 int birthdate_is_smaller(struct person* p1, struct person* p2);
 
+void print_person(struct person* p);
+
 /*
  *Frees the memory allocated for the node, including all the memory allocated for the first_name, last_name.
  */
