@@ -11,6 +11,8 @@ struct node{
 	void *data;
 };
 
+typedef struct node* List;
+
 /*
  * This function can insert a struct node, that is already filled with the names, at the right place in a list
  * The list can be empty, then the new_node will be inserted at the first position
@@ -18,22 +20,22 @@ struct node{
  * If there are two people with the same last_name the first_name is the next  for sorting.
  * If there are two people with the same first_name and last_name the position will be before the first occurrence of duplicates. 
  */
-struct node * insert_sorted(struct node* list, struct node* new_entry, int (*is_smaller)(struct node*, struct node*));
+List insert_sorted(List list, void* new_entry, int (*is_smaller)(void*, void*));
 
 /*
  * Allocates memory for a new struct node and returns a pointer on the allocated memory.
  */
-struct node * new_node(void);
+List new_node(void);
 
 /*
  * Prints the list.
  */
-void print_list(const struct node*, void (*print_entry(struct node *)));
+void print_list(List, void (*print_entry(void*)));
 
 /*
  * Frees a list, including all the memory allocated for the structs and the elements of the structs.
  */
-void free_list(struct node*, void (*free_node)(struct node *));
+void free_list(List, void (*free_node)(void*));
 
 
 #endif
