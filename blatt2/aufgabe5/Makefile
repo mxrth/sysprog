@@ -2,7 +2,7 @@ CFLAGS = -Wall -Wextra --std=c99 --pedantic -g3
 
 CC = clang
 
-OBJECTS = main.o input.o list.o mystring.o 
+OBJECTS = main.o input.o list.o mystring.o person.o 
 
 EXECUTABLE = person_list
 
@@ -26,6 +26,8 @@ input.o: input.c input.h mystring.h list.h
 list.o: list.c list.h
 
 mystring.o: mystring.c mystring.h
+
+person.o: person.c person.h
 
 .PHONY: clean
 clean:
