@@ -9,7 +9,7 @@
 int main(void) {
     FILE* in_file;
 
-    struct node* person, *list = NULL;
+    struct person* person, *list = NULL;
 	
 	/*Open the text file specified by the user*/
     in_file = get_input_file(); 
@@ -17,7 +17,7 @@ int main(void) {
 
 	
     while((person = read_name(in_file)) != NULL) {
-		list = insert_sorted(list, person);
+		list = insert_sorted(list, person, );
     }
 
 	/*Print the sorted list of the names*/
