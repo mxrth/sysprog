@@ -1,0 +1,16 @@
+Snippet (a):
+    Die Variable `i` wird immer wieder mit den Rückgabewerten von `malloc()` überschrieben.
+    Dadurch werden die Pointer, die auf die allokierten Integer zeigen, mit jedem neuen Schritt der Schleife
+    überschrieben, und durch Aufruf durch free in Zeile 7 wird nur der Speicherplatz des zuletzt allokierten
+    Integers wieder freigegeben.
+
+Snippet (b):
+    - (Schreibfehler in Zeile 3, `i` anstatt von `d`)
+    Ausserdem beginnt ein Array beim Index 0, damit ist d[2] nicht allokiert => Fehler!
+
+Snippet (c):
+    Hier wird mit `malloc()` nur ein int Pointer allokiert, dieser Zeigt aber auf einen
+    undefinierten Speicherbereich, trotzdem wird in zeile 4 der Wert 5 in diese Speicherzelle
+    geschrieben => Fehler!
+
+
