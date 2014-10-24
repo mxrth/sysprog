@@ -27,8 +27,9 @@ void free_list(struct node* list){
     }
 }
 
+
 /* < */
-int is_smaller(struct node* p1, struct node* p2) {
+int name_is_smaller(struct node* p1, struct node* p2) {
 	/*Compare first names*/
 	if(compare_strings(p1->last_name, p2->last_name) == Smaller) 
 		return 1;
@@ -38,6 +39,7 @@ int is_smaller(struct node* p1, struct node* p2) {
 		return 1;
 	return 0;
 }
+
 
 struct node * insert_sorted(struct node* list, struct node* new_entry){
 	struct node* temp = list;

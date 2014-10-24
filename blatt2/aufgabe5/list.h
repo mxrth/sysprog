@@ -4,18 +4,22 @@
 /*
  * Struct for a list that is capable of saving the first and last name of a person.
  * succ is a pointer on the next node in the list
+ * data is a void pointer on the data which is to be saved in the list
  */
 struct node{
 	struct node *succ;
-	char *last_name;
-	char *first_name;
+	void *data;
+};
+
+struct person{
+	char *first, *last;
 };
 
 /*
  * This compares two structs and acts as the "<"-relation
  * p1 < p2 iff (p1->last_name < p2-last_name) or (p1->last_name = p2-last_name and p1->first_name < p2-first_name)
  */
-int is_smaller(struct node* p1, struct node* p2);
+int name_is_smaller(struct node* p1, struct node* p2);
 
 /*
  * This function can insert a struct node, that is already filled with the names, at the right place in a list
