@@ -44,7 +44,7 @@ int birthdate_is_smaller(struct person* p1, struct person* p2){
 }
 
 void print_person(struct person* p){
-	
+	printf("%s %s %d.%d.%d %s\n",p->first_name,p->last_name,p->date.day,p->date.month,p->date.year,p->town);
 };
 
 /*Assumptions: node is a valid struct person*
