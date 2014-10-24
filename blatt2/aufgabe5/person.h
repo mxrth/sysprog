@@ -21,6 +21,10 @@ struct person{
  */
 int name_is_smaller(struct node* p1, struct node* p2);
 
+int town_is_smaller(struct person* p1, struct person* p2);
+
+int birthdate_is_smaller(struct person* p1, struct person* p2);
+
 /*
  *Frees the memory allocated for the node, including all the memory allocated for the first_name, last_name.
  */
