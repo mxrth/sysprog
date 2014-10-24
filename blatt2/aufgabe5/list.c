@@ -57,7 +57,7 @@ List insert_sorted(List list, void* new_data, int (*is_smaller)(void*, void*)){
 void print_list(List list, void (*print_entry(void*))){
     List temp = list;
 	for(;temp != NULL;temp = temp->succ) {
-		(*print_entry)(list->data);
+		(*print_entry)(temp->data);
     }
 	return;
 }
