@@ -1,22 +1,22 @@
-Victor Hugo
-Albert Einstein
-Johann-Wolfgang Von-Goethe
-Maximilian Peters
-Anna Anna
-Victor Hugo
-Peter Heinrichs
-Sebastian Hugo
-Jutta Janrichs
-Felix Hausdorff
-Leonard Euler
-Willi Wichtel
-Wenzel Wichtel
-Wallo Wichtel
-Petra Hamm
-Fridolin Schwarz
-Karl-Friedrich Gauss
-Zorro Zabel
-Karl-Friedrich Hunger
-Matthias Marburg
-Jack Jackson
-Jacko Jackson
+Victor Hugo 12 04 1892 Bern
+Albert Einstein 30 04 1892 Bern
+Johann-Wolfgang Von-Goethe 24 11 1749 Goettingen
+Maximilian Peters 01 04 2333 Neu-Kassel
+Anna Anna 29 02 1111 Leuven
+Victor Hugo 12 04 1892 Leuven
+Peter Heinrichs 03 04 1111 Goettingen
+Sebastian Hugo 23 04 2005 Krefeld
+Jutta Janrichs 22 03 2000 Krefeld
+Felix Hausdorff 22 03 2004 Bonn
+Leonard Euler 24 06 1943 Bonn
+Willi Wichtel 33 33 3333 Entenhausen
+Wenzel Wichtel 02 03 1994 Tetz
+Wallo Wichtel 03 04 1111 Juelich
+Petra Hamm 24 12 0000 Berlin
+Fridolin Schwarz 23 12 0001 Athen
+Karl-Friedrich Gauss 23 05 1674 Berlin
+Zorro Zabel 22 03 1844 Bern
+Karl-Friedrich Hunger 22 02 2222 Suechteln
+Matthias Marburg 11 11 1111 Geilenkirchen
+Jack Jackson 23 04 1777 Bonn-Mehlem
+Jacko Jackson 11 04 1555 Cochem
