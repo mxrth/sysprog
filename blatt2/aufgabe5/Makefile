@@ -12,11 +12,6 @@ ifdef SANITIZE
 CFLAGS += $(CLANG_SANITIZE_FLAGS) -O3
 endif
 
-ifeq ($(CC), clang)
-#More warnings!
-CFLAGS += -Weverything
-endif
-
 $(EXECUTABLE): input.o output.o main.o output.o list.o mystring.o
 	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(OBJECTS)
 

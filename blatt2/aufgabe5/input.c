@@ -1,5 +1,7 @@
 #include "input.h"
 
+#include "person.h"
+
 /*
  * Needed for:
  * string_len
@@ -8,9 +10,7 @@
 #include "mystring.h"
 
 /*
- * Needed for:
- * calloc
- * NULL
+ * Needed for alloc
  */
 #include <stdlib.h>
 
@@ -20,8 +20,6 @@
  * scanf
  * printf
  * fopen
- * FILE
- * EOF
  */
 #include <stdio.h>
 
@@ -45,40 +43,57 @@
  *   - each name consists of (ASCII)-characters (lower and upper) as well as '-' and '_' ([a-Z-_])
  *   - each name is shorter than 100 `char`s
  *  Returns NULL if not enough data could be read or memory allocation failed
+ * Example format:
+ * Henry Ford 30 07 1863 Detroit
+ * Wilhelm Busch 15 04 1832 Mechtshausen
  */
-struct node *read_name(FILE* file) {
+struct person *read_name(FILE* file) {
 
     /* used _size (and not for example _len) suffix to make clear these variables should hold the size 
      * of the _buffer_ holding firstname/lastname not the length of the string */
-    size_t firstname_size, lastname_size;
-    char first_name[101], last_name[101];
-    struct node* person;
+    char first_name[101], last_name[101], town[101];
+    int day, month, year;
+
+    struct person* person;
     int result;
 
     /*scanning might yield suprising results when one of the assumptions is broken,
      * but should be safe in any case */
-    result = fscanf(file, "%100s %100s", first_name, last_name);
+    result = fscanf(file, "%100s %100s %d %d %d %100s", first_name, last_name, &day, &month, &year, town);
     
     /*fscanf returns how many parameters were filled, or EOF on error*/
     if(result < 2 || result == EOF) return NULL;
 
-    /*buffer must be one `char` bigger than the length of the string to hold the terminationg '\0'*/
-    firstname_size = string_len(first_name)+1;
-    lastname_size = string_len(last_name)+1;
 
-    person = new_node();
-    if(!person) return NULL;
     
-    ALLOC_OR(person->first_name, firstname_size) return NULL;
-    ALLOC_OR(person->last_name, lastname_size) return NULL;
 
-    string_copy(first_name, person->first_name, firstname_size);
-    string_copy(last_name, person->last_name, lastname_size);
+    /*buffer must be one `char` bigger than the length of the string to hold the terminationg '\0'*/
 
+    /*Writing this as a macro, because i cannot alter dest
+     without passing it as a double ponter*/
+    #define ALLOC_AND_COPY(source, dest) \
+	{ \
+	    size_t size = string_len(source); \
+	    ALLOC_OR(dest, size) return NULL; /*the other reason: convient early returning*/ \
+	    string_copy(source, dest, size); \
+	}
+
+    
+
+    ALLOC_OR(person, 1) return NULL;
+    
+    ALLOC_AND_COPY(first_name, person->first_name);
+    ALLOC_AND_COPY(last_name, person->last_name);
+    ALLOC_AND_COPY(town, person->town);
+
+    person->date.day = day;
+    person->date.month = month;
+    person->date.year = year;
 
     return person;
     
 }
+
 
 FILE *get_input_file(void) {
     char path[256]; 

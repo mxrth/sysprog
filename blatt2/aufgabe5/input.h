@@ -12,7 +12,7 @@
  * First and last name are allocated on the heap (just like the struct)
  * Returns a pointer to the newly allocated node, NULL on failure
  */
-struct node *read_name(FILE* in);
+struct person *read_name(FILE* in);
 
 /*
  * Tries to read a filename from stdin an opens the file.

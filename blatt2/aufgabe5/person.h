@@ -11,8 +11,8 @@ struct date{
 };
 
 struct person{
-	char *first, *last, *town;
-	struct date;
+	char *first_name, *last_name, *town;
+	struct date date;
 };
 
 /*
