@@ -8,7 +8,7 @@ EXECUTABLES = matrixgen matrixop
 
 #all: matrixgen matrixop
 
-matrixgen: matrixgen_main.o matrix_gen.o matrix_alloc.o
+matrixgen: matrixgen_main.o matrix_gen.o matrix_alloc.o matrix_io.o
 	$(CC) -o $@ $^
 
 matrix_gen.o: matrix_gen.c matrix.h
