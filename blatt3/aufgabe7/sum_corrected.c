@@ -5,12 +5,12 @@ int main(void) {
   int number2; /* second summand */
 
   printf("Bitte erste ganze Zahl eingeben: ");
-  scanf("%i", number1);
+  scanf("%i", &number1);
 
   printf("Bitte zweite ganze Zahl eingeben: ");
-  scanf("%i", number2);
+  scanf("%i", &number2);
  
-  if (number1 = number2) {
+  if (number1 == number2) {
   	 printf("Die eingegebenen Zahlen sind identisch.\n");
   }
   
