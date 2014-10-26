@@ -18,7 +18,7 @@ Matrix* matrix_read(FILE* text){
 
 	for(i=0;i<A->rows;i++){
 		for(j=0;j<A->columns;j++){
-			fscanf(text,"%zu",&(A->data[i][j]));
+			fscanf(text,"%ld",&(A->data[i][j]));
 		}
 	}
 	
@@ -29,7 +29,7 @@ void matrix_print(Matrix *A){
 	size_t i,j;
 	for(i=0;i<A->rows;i++){
 		for(j=0;j<A->columns;j++){
-			printf("%zu ",A->data[i][j]);
+			printf("%ld ",A->data[i][j]);
 		}
 		printf("\n");		
 	}		
