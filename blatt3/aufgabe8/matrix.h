@@ -53,16 +53,16 @@ int matrix_add(Matrix *A,Matrix *B,Matrix *Result);
  */
 int matrix_multiply(Matrix *A,Matrix *B,Matrix *Result);
 
+/*
+ *BEN
+ */
+Matrix* matrix_read(FILE*);
+
 /*Prints the matrix
  *
  *BEN
  */
 void matrix_print(Matrix *A);
-
-/*
- *BEN
- */
-Matrix* matrix_read(FILE*);
 
 /*
  *CAT
