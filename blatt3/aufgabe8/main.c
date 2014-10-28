@@ -3,7 +3,7 @@
 
 #include "matrix.h"
 
-#define ERROR(s) {printf("ERROR:\n %s",s);exit(1);}
+#define ERROR(s) {printf("ERROR:\n %s \n\n",s);exit(1);}
 
 /*The program expects one argument:
  *The user has to enter the name of a .txt file in which a matrix is stored.
@@ -23,7 +23,11 @@
  */
 int main(int argc, char* argv[]){
 	FILE* text;
-	Matrix *A;	
+	Matrix *A;
+	Matrix *B;
+
+	B = matrix_allocate(7,9);
+	matrix_fill(B,-78);
 
 	if(argc < 2){
 		ERROR("Not the right amount of arguments")
@@ -40,8 +44,11 @@ int main(int argc, char* argv[]){
 		ERROR("Fehler beim Einlesen der Matrix")
 	}
 	fclose(text);
-
+	
+	printf("Matrix A:\n");
 	matrix_print(A);
+	printf("Matrix B:\n");
+	matrix_print(B);
 
 	return 0;
 }
