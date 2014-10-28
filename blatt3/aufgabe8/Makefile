@@ -1,11 +1,12 @@
-CC = clang
+CC := clang
 
-CFLAGS = -g3 -Wall -Wextra --std=c99 --pedantic
+CFLAGS := -g3 -Wall -Wextra --std=c99 --pedantic
 
-OBJECTS = matrixgen_main.o matrix_gen.o matrix_alloc.o matrix_io.o main.o matrix_ops.o
+OBJECTS := matrixgen_main.o matrix_gen.o matrix_alloc.o matrix_io.o main.o matrix_ops.o
 
-EXECUTABLES = matrixgen matrixop
+EXECUTABLES := matrixgen matrixop
 
+.PHONY: all
 all: matrixgen matrixop
 
 matrixgen: matrixgen_main.o matrix_gen.o matrix_alloc.o matrix_io.o
