@@ -25,3 +25,24 @@ int matrix_add(Matrix *A,Matrix *B,Matrix *Result){
 	}
 	return 0;
 }
+
+int matrix_multiply(Matrix *A,Matrix *B,Matrix *Result){
+
+	/*check dimensions */
+	if(A->columns != B->rows || A->rows != Result->rows ||B->columns != Result->columns) {
+	return 1;
+	}
+	/* calculate */
+	size_t i,j,k,l;
+	for(i=0;i<A->rows;i++){
+		for(j=0;j<B->columns;j++){
+			for(k=0;k<A->columns;k++){
+				for(l=0;l<B->rows;l++){
+					Result->data[i],[j] += A->data[i][k] * B->data[l][j];	
+				}
+			}
+		}
+	}
+	return 0;		
+
+}
