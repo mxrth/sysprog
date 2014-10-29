@@ -17,3 +17,13 @@ Matrix* matrix_allocate(size_t rows, size_t columns) {
     }
     return mat;
 }
+
+
+void matrix_free(Matrix *A) {
+	int i = 0;
+	for(;i<A->rows;i++) {
+	free(A->data[i]);
+	}
+	free(A->data);
+	free(*mat);
+}
