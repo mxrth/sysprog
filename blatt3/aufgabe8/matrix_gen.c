@@ -28,9 +28,11 @@ void seed_random(void) {
     srand((unsigned) time(NULL));
 }
 
+/* int x = bedingung ? wert_wahr : wert_falsch; */
+
 int generate_random(int max) {
     int negative = rand() % 2;
     int r = rand() % ((max < 0) ? INT_MAX  : max) ;
-    if(negative) return (-1)*r;
+    if(negative) return -r;
     else return r;
 }

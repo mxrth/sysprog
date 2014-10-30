@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     Operation op;
     Matrix *A, *B, *Result;
     if(!parse_input(argc, argv, &infile_A, &infile_B, &op)) {
-	ERROR("Invalid prameters. \nUsage: matrixops <infile> [+|*] <outfile>");
+	ERROR("Invalid prameters. \nUsage: matrixops <matrix_A_file> [a[dd]|m[ultiply]] <matrix_B_file>");
     }
     if( !(A = matrix_read(infile_A)) ) ERROR("Could not read first input file");
     if( !(B = matrix_read(infile_B)) ) ERROR("Could not read second input file");
@@ -40,7 +40,7 @@ int parse_input(int argc, char* argv[], FILE **in_A, FILE **in_B, Operation* op)
 }
 
 Operation parse_op(char* op) {
-    if(op[0] == '\0') return UNKNOWN; /*String is empty (Should not happen) or too long*/
+    if(op[0] == '\0') return UNKNOWN; /*String is empty (Should not happen)*/
     if(op[0] == 'm') return MULTIPLY;
     if(op[0] == 'a') return ADD;
     return UNKNOWN;

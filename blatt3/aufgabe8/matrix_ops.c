@@ -42,6 +42,7 @@ int matrix_multiply(Matrix *A,Matrix *B,Matrix *Result){
 	}
 	/* calculate */
 	size_t i,j,k;
+	matrix_fill(Result, 0);
 	for(i=0;i<A->rows;i++){
 		for(k=0;k<B->columns;k++){
 			for(j=0;j<A->columns;j++){				
