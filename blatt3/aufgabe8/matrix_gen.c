@@ -1,7 +1,9 @@
 #include "matrix.h"
 #include <stdlib.h>
 #include <time.h> /*for seeding*/
-long generate_random(void);
+#include <limits.h>
+
+int generate_random(int);
 
 void seed_random(void);
 
@@ -16,7 +18,7 @@ Matrix* matrix_generate_random(size_t rows, size_t columns, int max) {
 
     for(i = 0; i < rows; i++) {
 	for(j = 0; j < columns; j++) {
-	    m[i][j] = generate_random();
+	    m[i][j] = generate_random(max);
 	}
     }
     return mat;
@@ -26,8 +28,9 @@ void seed_random(void) {
     srand((unsigned) time(NULL));
 }
 
-long generate_random(void) {
-    long negative = rand() % 2;
-    if(negative) return (-1)*rand();
-    else return rand();
+int generate_random(int max) {
+    int negative = rand() % 2;
+    int r = rand() % ((max < 0) ? INT_MAX  : max) ;
+    if(negative) return (-1)*r;
+    else return r;
 }

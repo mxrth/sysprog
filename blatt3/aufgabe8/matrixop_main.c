@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 }
 
 int parse_input(int argc, char* argv[], FILE **in_A, FILE **in_B, Operation* op) {
-    if(argc != 4) return 0;
+    if(argc != 4) {printf("%d\n", argc); return 0;}
     if( !(*in_A = fopen(argv[1], "r")) ) return 0;
     if( !(*in_B = fopen(argv[3], "r")) ) return 0;
     if( (*op = parse_op(argv[2])) == UNKNOWN) return 0;
@@ -40,9 +40,9 @@ int parse_input(int argc, char* argv[], FILE **in_A, FILE **in_B, Operation* op)
 }
 
 Operation parse_op(char* op) {
-    if(op[0] == '\0' || op[1] != '\0') return UNKNOWN; /*String is empty (Should not happen) or too long*/
-    if(op[0] == '*') return MULTIPLY;
-    if(op[0] == '+') return ADD;
+    if(op[0] == '\0') return UNKNOWN; /*String is empty (Should not happen) or too long*/
+    if(op[0] == 'm') return MULTIPLY;
+    if(op[0] == 'a') return ADD;
     return UNKNOWN;
 }
 

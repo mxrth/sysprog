@@ -23,7 +23,7 @@ Matrix* matrix_allocate(size_t rows, size_t columns);
  *
  *MAX
  */
-Matrix* matrix_generate_random(size_t rows, size_t columns);
+Matrix* matrix_generate_random(size_t rows, size_t columns, int max);
 
 /*Fills all the entries in the matrix with the value 'a'
  *
