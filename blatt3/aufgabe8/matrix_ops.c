@@ -41,13 +41,11 @@ int matrix_multiply(Matrix *A,Matrix *B,Matrix *Result){
 	    return 0;
 	}
 	/* calculate */
-	size_t i,j,k,l;
+	size_t i,j,k;
 	for(i=0;i<A->rows;i++){
-		for(j=0;j<B->columns;j++){
-			for(k=0;k<A->columns;k++){
-				for(l=0;l<B->rows;l++){
-					Result->data[i][j] += A->data[i][k] * B->data[l][j];	
-				}
+		for(k=0;k<B->columns;k++){
+			for(j=0;j<A->columns;j++){				
+					Result->data[i][k] += A->data[i][j] * B->data[j][k];	
 			}
 		}
 	}
