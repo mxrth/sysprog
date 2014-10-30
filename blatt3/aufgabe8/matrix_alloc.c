@@ -20,10 +20,11 @@ Matrix* matrix_allocate(size_t rows, size_t columns) {
 
 
 void matrix_free(Matrix *A) {
-	int i = 0;
-	for(;i<A->rows;i++) {
-	free(A->data[i]);
+	size_t i = 0;
+	for(;i < A->rows; i++) {
+	    free(A->data[i]);
 	}
 	free(A->data);
-	free(*mat);
+	free(A);
 }
+

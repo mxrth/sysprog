@@ -70,6 +70,9 @@ void matrix_print(Matrix *A);
 void matrix_free(Matrix *A);
 
 
+int can_add(Matrix *A, Matrix *B);
+int can_multiply(Matrix *A, Matrix *B); 
+
 
 
 #endif

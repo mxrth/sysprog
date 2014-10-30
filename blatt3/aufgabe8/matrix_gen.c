@@ -5,7 +5,7 @@ long generate_random(void);
 
 void seed_random(void);
 
-Matrix* matrix_generate_random(size_t rows, size_t columns) {
+Matrix* matrix_generate_random(size_t rows, size_t columns, int max) {
     Matrix* mat;
     size_t i, j;
     long** m;
