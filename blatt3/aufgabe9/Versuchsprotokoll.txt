@@ -1,0 +1,29 @@
+Schritt 1: -pg als Compilerflag im Makefile hinzugefuegt
+"make clean" und dann "make all" aufrufen, um das Programm zu kompilieren, sodass es den output erzeugt, mit dem gprof dann arbeiten kann
+
+Schritt 2: Ausfuehren des Programms, damit die erforderliche Datei 'gmon.out' generiert wird
+Wir untersuchen hier nur, wie sich das "matrixop"-Programm verhaelt.
+Dafuer wurde vorher eine grosse 1000x1000 Matrix "A" generiert.
+
+Schritt3: Aufrufen von gprof auf die generierte Datei gmon.out (nach eventueller Umbenennung)
+
+Versuch1: matrixops soll A+A berechnen
+make
+./matrixgen 1000 1000 > A
+./matrixop A add A && mv gmon.out prof_add //Umbennenung der Output-Datei
+gprof ./matrixop prof_add > report_add
+
+Versuch2: matrixops soll A*A berechnen
+./matrixop A multiply A && mv gmon.out prof_mult //Umbennenung der Output-Datei
+gprof ./matrixop prof_mult > report_mult
+
+
+Angehaengte Dateien: report_add und report_mult
+
+Ergebnis: 0.01 Sekunden zum ausfuehren der eigentlichen Addition, aber ca. 26 Sekunden zum ausfuehren der Multiplikation
+
+Fazit: Die Addition von Matrizen laesst sich in O(n^2) ausfuehren, da nur einmal ueber jeden Eintrag der Matrix gelaufen werden muss.
+Also in der Groessenordnung von 10^6 = 1000000 Operationen
+
+Die Multiplikation von Matrizen funktioniert aber nur in O(n^3), da fuer jeden Eintrag des Ergebnisses n Multiplikationen und n-1 Additionen durchgefuert werden muessen. Da dies n^2 mal erfolgen muss sind wir bei kubischer Laufzeit.
+Also in der Groessenordnung von 10^9 = 1000000000 Operationen

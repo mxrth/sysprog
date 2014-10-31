@@ -1,6 +1,6 @@
 CC := clang
 
-override CFLAGS += -g3 -Wall -Wextra --std=c99 --pedantic
+override CFLAGS += -g3 -Wall -Wextra --std=c99 --pedantic -pg
 
 OBJECTS := matrixgen_main.o matrix_gen.o matrix_alloc.o matrix_io.o main.o matrix_ops.o matrixop_main.o
 
