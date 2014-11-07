@@ -2,11 +2,14 @@ CC := clang
 
 override CFLAGS += -g3 -Wall -Wextra --std=c99 --pedantic -pg
 
-OBJECTS :=
+OBJECTS := main.o input.o
 
-EXECUTABLES := 
+EXECUTABLES := client
 
-all: 
+all: client
+
+client: $(OBJECTS)
+	$(CC) -o $@ $^
 
 main.o: *.c *.h
 
