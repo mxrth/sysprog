@@ -1,0 +1,5 @@
+Nein, man kann ohne zusaetliche Mechanismen nicht den korrekten Empfang der Nachrichten ueberpruefen.
+Das liegt daran, dass bei UDP keine Verbindung aufgebaut wird, sondern das Datengramm einfach losgeschickt wird.
+Deswegen hat man keine Sicherheit was den Empfang der Daten angeht.
+Wuerde jetzt Mechanismen implementieren um den Empfang zu ueberpruefen, dann haette man praktisch eine Zwei-Wege-Verbindung und koennte besser
+direkt TCP verwenden.
