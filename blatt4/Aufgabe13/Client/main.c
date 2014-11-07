@@ -23,7 +23,10 @@ int main(int argc, char* argv[]){
 	dest.sin_port = htons(atoi(argv[2]));
 	dest.sin_addr.s_addr = inet_addr(argv[1]);
 
-	printf("Sending to server %s to port %s\n",argv[2],argv[1]);
+	printf("dest.sin_port is %i\n",dest.sin_port);
+	printf("dest.sin_addr.s_addr is %i\n",dest.sin_addr.s_addr);
+
+	printf("Sending to server %s to port %s\n",argv[1],argv[2]);
 	
 	sock = socket(AF_INET, SOCK_DGRAM, 0);
 	
@@ -47,10 +50,17 @@ int main(int argc, char* argv[]){
 	printf("Type your message to send to server. Type 'q' to quit\n");
 
 	while(1){
-		get_input_console (message);		
+		get_input_console(message);
+		if(!strcmp(message, "q")){
+			break;		
+		}
+		printf("Trying to send string '%s'\n",message);	
 		err=sendto(sock, message, strlen(message) + 1, 0, (struct sockaddr*) &dest, sizeof(struct sockaddr_in));
 		if(err < 0){
 			ERROR("Was not able to send message. Please try again.")
+		}
+		else{
+			printf("%i characters were sent\n",err);		
 		}
 	}
 	
