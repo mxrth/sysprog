@@ -2,15 +2,12 @@ CC := clang
 
 override CFLAGS += -g3 -Wall -Wextra --std=c99 --pedantic
 
-OBJECTS :=
+EXECUTABLE := server 
 
-EXECUTABLES := 
-
-all: 
-
-main.o: *.c *.h
+server: server.c util.h
+	$(CC) $(CFLAGS) -o server server.c
 
 .PHONY: all clean
 
 clean:
-	-rm -rf $(OBJECTS) $(EXECUTABLES)
+	-rm -rf $(OBJECTS) $(EXECUTABLE)
