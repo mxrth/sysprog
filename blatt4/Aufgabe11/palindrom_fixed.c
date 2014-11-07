@@ -16,7 +16,7 @@ int palindrom_check1(const char *st1)
 int main(void) {
   char *st1, *st2;
   int st1_len, i;
-  char *exit = 'exit';
+  char *exit = "exit";
        
   st1 = malloc(100);
   st2 = malloc(100);
