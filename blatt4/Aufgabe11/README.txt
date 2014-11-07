@@ -16,4 +16,9 @@ i.Buchstaben. Dafür muss aber
 toupper((int)st1[st1_len -i -1]
 statt
 toupper((int)st1[st1_len -i]
-betrachtet werden, da das Array von 0 bis st1_len-1 indiziert ist.
+betrachtet werden, da das Array von 0 bis st1_len-1 indiziert ist
+
+st2 wird durch toupper() so modifiziert, dass alle Buchstaben Großbuchstaben sind. Dies muss man auch mit  std1 machen um diese Vergleichen zu können.
+
+Um st1 und st2 zu vergleichen sollte man die sringcompare Funktion benutzen:
+if (strcmp(st1, st2) == 0)

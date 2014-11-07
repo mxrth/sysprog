@@ -6,7 +6,6 @@
 int palindrom_check1(const char *st1)
 {
   int st1_len = strlen(st1), i;
-  printf("%i",st1_len);
 
   for(i = 0; i < st1_len / 2; i++)
     if (toupper((int)st1[i]) != toupper((int)st1[st1_len -i -1])) return 0;
@@ -32,12 +31,13 @@ int main(void) {
 
     for (i=0; i<st1_len; i++) {
       st2[i] = toupper((int)st1[st1_len -1 -i]);
+	  st1[st1_len -1 -i] = toupper((int)st1[st1_len -1 -i]);
     }
-    
+
     if (palindrom_check1(st1)) printf("1. Test: Palindrom \n");
     else printf("1. Test: Kein Palindrom \n");  
  
-    if (st1 == st2) printf("2. Test: Palindrom\n");
+    if (strcmp(st1, st2) == 0) printf("2. Test: Palindrom\n");
     else printf("2. Test: Kein Palindrom\n");
  }
  
