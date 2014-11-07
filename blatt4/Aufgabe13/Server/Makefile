@@ -1,6 +1,6 @@
 CC := clang
 
-override CFLAGS += -g3 -Wall -Wextra --std=c99 --pedantic -pg
+override CFLAGS += -g3 -Wall -Wextra --std=c99 --pedantic
 
 OBJECTS :=
 
