@@ -78,7 +78,7 @@ int manage_connections(int anzverbindungen,int tcp_sock, int (*managerfunction) 
 		(*managerfunction)(datastream, inet_ntoa(client_addr.sin_addr));
 		
 		/*Closing the stream*/
-		fclose(datastream);
+		err = fclose(datastream);
 		if(err == EOF){
 			return EOF;
 		}
