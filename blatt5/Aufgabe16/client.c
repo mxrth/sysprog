@@ -49,7 +49,7 @@ int main() {
 	dest.sin_port = htons(80);
 	dest.sin_addr = (get_in_addr(hostname)); 
 	
-	printf(" was Max Funktion get_in_addr() zurückgibt: %s \n", inet_ntoa(dest.sin_addr));
+	/*printf(" was Max Funktion get_in_addr() zurückgibt: %s \n", inet_ntoa(dest.sin_addr)); */
 	
 	/*Socketerstellung*/
 	int sock;
@@ -72,7 +72,7 @@ int main() {
 	ssize_t t;
 	char write_buff[255];
 	
-	strcpy(write_buff,"GET de/wg/cs/lehre/ws-201415/sysprog.html HTTP/1.1 \r\n From: Gruppe42 \r\n Host: net.cs.uni-bonn.de \r\n \r\n");
+	strcpy(write_buff,"GET /de/wg/cs/lehre/ws-201415/sysprog HTTP/1.1\r\nFrom: Gruppe42\r\nHost: net.cs.uni-bonn.de\r\n\r\n");
 	
 	ssize_t count = strlen(write_buff)+1;
 	t =	write(sock, write_buff, count); /*write_buff oder  &write_buff?*/
@@ -85,7 +85,7 @@ int main() {
 		ERROR("Wasn't able to write everything")	
 	}	
 	
-	printf(" Get Anfrage geschickt \n");
+	printf(" Get Anfrage geschickt \n\n");
 	
 	
 	
@@ -94,18 +94,67 @@ int main() {
 	
 	char read_buff[MAXLINE]; /*wieviel Platz ist notwendig? */
 	ssize_t r;
-	r = readline(sock, read_buff, strlen(read_buff)); 
 	
-	printf("Antwort gelesen! r = %i \n",r);
-	
+	/* 1.Zeile auslesen und testen ob Statuszeile des Headers in Ordnung*/	
+	r = readline(sock, read_buff, MAXLINE); 
 	/*Fehlerabfangen */
 	if(r < 0){
 		ERROR("Wasn't able to read")	
 	}
-
+	if(!strcmp(read_buff, "HTTP/1.1 200 OK")) {
+		ERROR("Bad Request");
+	}
+		
+	/*weiteren Header auslesen und ausgeben */
+	while(1) {
+		r = readline(sock, read_buff, MAXLINE); 
 	
-	/*Ausgabe in der Konsole */
-	printf("Im read_buffer : %s \n",read_buff);
+		/*Fehlerabfangen */
+		if(r < 0){
+			ERROR("Wasn't able to read")	
+		}
+		
+		if(r==2) {
+			break;
+		}
+		/*Ausgabe in der Konsole */		
+		printf("%s ",read_buff);
+	}
+	
+	/*restlichen Test in Datei speichern */
+	FILE * file;	
+	file = fopen("zettel.html", "w");
+	int err;
+	if(file == NULL) {
+		ERROR("File couldn't be opened")
+	}
+	
+	while(1) {
+		r = readline(sock, read_buff, MAXLINE); 
+		printf("%s ",read_buff);
+		/*Fehlerabfangen */
+		if(r < 0){
+			ERROR("Wasn't able to read")	
+		}
+		
+		if(strstr(read_buff, "</body>")!= NULL) {
+		printf("I reached the body");
+			break;
+		}
+		
+		/* Schreiben in Datei */	
+
+		err = fputs(read_buff, file);
+		if(err < 0){
+			ERROR("Wasn't able to write into file")	
+		}
+	}
+	
+	err = fclose(file);
+	if(err < 0){
+			ERROR("Wasn't able to close the file")	
+		}
+	
 	/* =0 Verbindungsabbau */
 	
 	/*close*/
@@ -115,7 +164,7 @@ int main() {
 			ERROR("Wasn't able to close the socket")	
 		}
 		
-	printf("Socket erfolgreich geschlossen");
+	printf("\nSocket erfolgreich geschlossen");
 	
 	return 0;
 }
