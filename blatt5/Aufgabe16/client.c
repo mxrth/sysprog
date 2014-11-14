@@ -2,6 +2,7 @@
 
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <unistd.h>
 
 /*Von Aufgabe 12 */
 struct in_addr get_in_addr(char* hostname) {
@@ -30,21 +31,52 @@ int main() {
 	dest.sin_addr.s_addr = get_in_addr(hostname);
 	
 	/*Länge der Adressstruktur */
-	socklen_t addrlen; /*bestimmung addrlen */
+	/*socklen_t addrlen; /*bestimmung addrlen */
 	
 	/*Socketerstellung*/
 	sock = socket(AF_INET, SOCK_STREAM, 0);
-		if(sock < 0){
-			ERROR("Wasn't able to call function socket")	
-		}
+	if(sock < 0){
+		ERROR("Wasn't able to call function socket")	
+	}
 		
 	/*Socket connect */	
-	int connect(sock, &dest, addrlen);
+	int c;
+	c = connect(sock, &dest, sizeof(dest));
+	if(c < 0){
+			ERROR("Wasn't able to call function connect")	
+		}
+		
+	/*write() */
+
+	ssize_t t;
+	char write_buff[]; /*füllen mit inhalt*/
+	t =	write(sock, write_buff, strlen(write_buff)+1); /*write_buff oder  &write_buff?*/
 	
+	/*Überprüfung ob write() korrekt ausgeführt wurde */
+	if(t < 0){
+		ERROR("Wasn't able to write anything")	
+	}
+	if(t < count){
+		ERROR("Wasn't able to write everything")	
+	}	
 	
-	write()
-	read()
-	close()
+	/* read() */
+	char read_buff[]; /*wieviel Platz ist notwendig? */
+	ssize_t r;
+	r = read(sock, void *buff, strlen(read_buff)+1); /*FileDescriptor vom richtigen Socket?)*/
+	
+	/*Fehlerabfangen */
+	if(r < 0){
+		ERROR("Wasn't able to read")	
+	}
+	/* =0 Verbindungsabbau */
+	
+	/*close*/
+	int clos;
+	clos = close(sock);
+	if(clos < 0){
+			ERROR("Wasn't able to close the socket")	
+		}
 	
 	return 0;
 }
