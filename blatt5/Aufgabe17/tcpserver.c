@@ -4,6 +4,7 @@
 #include <netinet/in.h>
 
 #include "sock.h"
+#include "handler.h"
 #include "util.h"
 
 /*Input: Parameter 1 is the number of requests that should be handeled
@@ -41,11 +42,15 @@ int main(int argc, char **argv)
 		ERROR("Could not bind socket\n")
 		return 1;
 	}
+	if (err == -3) {
+		ERROR("Could not put socket into listening mode\n")
+		return 1;
+	}
 
 	print_port(tcp_sock);
 
-	//anzverbindungen = manage_connections(anzverbindungen, &manager);
-	//printf("%d Verbindungen wurden behandelt.\n", anzverbindungen);
+	anzverbindungen = manage_connections(anzverbindungen,tcp_sock, 	&manager);
+	printf("%d Verbindungen wurden behandelt.\n", anzverbindungen);
 	
 	err = close_socket(tcp_sock);
 
