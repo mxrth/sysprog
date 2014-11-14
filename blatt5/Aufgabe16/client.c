@@ -1,8 +1,21 @@
 /*Client:*/
 
+#include <stdio.h>
+#include <string.h>
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <unistd.h>
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include "util.h"
+
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
 
 /*Von Aufgabe 12 */
 struct in_addr get_in_addr(char* hostname) {
@@ -23,17 +36,18 @@ struct in_addr get_in_addr(char* hostname) {
 int main() {
 
 	/*Hostname */
-	char *hostname = /*Hostname muss eingefügt werden */
+	char *hostname = ""; /*Hostname muss eingefügt werden */
 	/*Serveradresse */
 	struct sockaddr_in dest;
 	dest.sin_family = AF_INET;
 	dest.sin_port = htons(80);
-	dest.sin_addr.s_addr = get_in_addr(hostname);
+	dest.sin_addr.s_addr = *inet_ntoa(get_in_addr(hostname));
 	
 	/*Länge der Adressstruktur */
-	/*socklen_t addrlen; /*bestimmung addrlen */
+	/*socklen_t addrlen; --bestimmung addrlen */
 	
 	/*Socketerstellung*/
+	int sock;
 	sock = socket(AF_INET, SOCK_STREAM, 0);
 	if(sock < 0){
 		ERROR("Wasn't able to call function socket")	
@@ -41,7 +55,7 @@ int main() {
 		
 	/*Socket connect */	
 	int c;
-	c = connect(sock, &dest, sizeof(dest));
+	c = connect(sock, (struct sockaddr *)&dest, sizeof(dest));
 	if(c < 0){
 			ERROR("Wasn't able to call function connect")	
 		}
@@ -50,7 +64,8 @@ int main() {
 
 	ssize_t t;
 	char write_buff[]; /*füllen mit inhalt*/
-	t =	write(sock, write_buff, strlen(write_buff)+1); /*write_buff oder  &write_buff?*/
+	ssize_t count = strlen(write_buff)+1;
+	t =	write(sock, write_buff, count); /*write_buff oder  &write_buff?*/
 	
 	/*Überprüfung ob write() korrekt ausgeführt wurde */
 	if(t < 0){
@@ -63,7 +78,7 @@ int main() {
 	/* read() */
 	char read_buff[]; /*wieviel Platz ist notwendig? */
 	ssize_t r;
-	r = read(sock, void *buff, strlen(read_buff)+1); /*FileDescriptor vom richtigen Socket?)*/
+	r = read(sock, read_buff, strlen(read_buff)+1); /*FileDescriptor vom richtigen Socket?)*/
 	
 	/*Fehlerabfangen */
 	if(r < 0){
