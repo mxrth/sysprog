@@ -50,6 +50,13 @@ int main(int argc, char **argv)
 	print_port(tcp_sock);
 
 	anzverbindungen = manage_connections(anzverbindungen,tcp_sock, 	&manager);
+	if(anzverbindungen == -2){
+		ERROR("Could not open stream mit fdopen.")
+	}
+	if(anzverbindungen == EOF){
+		ERROR("Could not close stream.")
+	}
+	
 	printf("%d Verbindungen wurden behandelt.\n", anzverbindungen);
 	
 	err = close_socket(tcp_sock);

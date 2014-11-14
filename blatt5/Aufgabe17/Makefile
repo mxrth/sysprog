@@ -1,6 +1,6 @@
 CC := clang
 
-override CFLAGS += -g3 -Wall -Wextra --std=c99 --pedantic
+override CFLAGS += -g3 -Wall -Wextra --std=gnu99 --pedantic
 
 EXECUTABLE := tcpserver
 
