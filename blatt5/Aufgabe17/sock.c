@@ -80,7 +80,7 @@ int manage_connections(int anzverbindungen,int tcp_sock, int (*managerfunction) 
 		/*Closing the stream*/
 		err = fclose(datastream);
 		if(err == EOF){
-			return EOF;
+			printf("ERROR! Couldn't close stream\n\n");
 		}
 		
 		/*Adjusting iterators*/
