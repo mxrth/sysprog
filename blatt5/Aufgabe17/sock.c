@@ -7,6 +7,7 @@
 
 #include "sock.h"
 #include "util.h"
+#include <errno.h>
 
 /*Input: A valid portnumber 'portnum', an int-pointer where the file descriptor of the new socket will be saved in 
  *
@@ -52,7 +53,7 @@ int manage_connections(int anzverbindungen,int tcp_sock, int (*managerfunction) 
 {
 	FILE *datastream;	
 	int handeled_connections = 0;
-	int new_sock, err;
+	int new_sock;
 	struct sockaddr_in client_addr;
 	socklen_t addrlen = sizeof(struct sockaddr_in);	
 	
@@ -69,7 +70,7 @@ int manage_connections(int anzverbindungen,int tcp_sock, int (*managerfunction) 
 		printf("A new socket was created!\n");
 	
 		/*Creating a stream on the new socked with fdopen*/
-		datastream = fdopen(new_sock, "r+");
+		datastream = fdopen(new_sock, "r+b");
 		if(datastream == NULL){
 			return -2;		
 		}
@@ -78,10 +79,8 @@ int manage_connections(int anzverbindungen,int tcp_sock, int (*managerfunction) 
 		(*managerfunction)(datastream, inet_ntoa(client_addr.sin_addr));
 		
 		/*Closing the stream*/
-		err = fclose(datastream);
-		if(err == EOF){
-			printf("ERROR! Couldn't close stream\n\n");
-		}
+		fclose(datastream);
+		
 		
 		/*Adjusting iterators*/
 		anzverbindungen--;
