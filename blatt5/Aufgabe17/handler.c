@@ -5,7 +5,14 @@
 #include "util.h"
 
 int handle_get_request(FILE *datastream,char *first_line ,char *information){
-
+	char not_supported[50];	
+	
+	if(NULL == strstr(first_line,"HTTP/1.1")){
+		sprintf(not_supported, "HTTP/1.1 505 HTTP Version Not Supported\r\n");
+		printf("%s",not_supported);
+		fprintf(datastream, "%s", not_supported);
+		return -1;
+	}
 
 	return 0;
 }
