@@ -7,7 +7,7 @@ See http://www.unpbook.com
 
 */
 
-#inlcude <stdio.h>
+#include <stdio.h>
 #include "unp_readline.h"
 #include <unistd.h>
 #include <errno.h>
