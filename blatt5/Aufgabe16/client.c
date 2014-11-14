@@ -36,12 +36,16 @@ struct in_addr get_in_addr(char* hostname) {
 int main() {
 
 	/*Hostname */
-	char *hostname = ""; /*Hostname muss eingefügt werden */
+	char *hostname = "172.16.1.103"; /*Hostname muss eingefügt werden */
 	/*Serveradresse */
 	struct sockaddr_in dest;
 	dest.sin_family = AF_INET;
-	dest.sin_port = htons(80);
-	dest.sin_addr.s_addr = *inet_ntoa(get_in_addr(hostname));
+	dest.sin_port = htons(2005);
+	dest.sin_addr = (get_in_addr(hostname)); 
+	printf(" was Max Funktion get_in_addr() zurückgibt: %s \n", inet_ntoa(dest.sin_addr));
+	
+	/*Test Ben */
+	/*dest.sin_addr.s_addr = inet_addr((get_in_addr(hostname));*/
 	
 	/*Länge der Adressstruktur */
 	/*socklen_t addrlen; --bestimmung addrlen */
@@ -63,7 +67,7 @@ int main() {
 	/*write() */
 
 	ssize_t t;
-	char write_buff[]; /*füllen mit inhalt*/
+	char write_buff[255]; /*füllen mit inhalt*/
 	ssize_t count = strlen(write_buff)+1;
 	t =	write(sock, write_buff, count); /*write_buff oder  &write_buff?*/
 	
@@ -76,7 +80,7 @@ int main() {
 	}	
 	
 	/* read() */
-	char read_buff[]; /*wieviel Platz ist notwendig? */
+	char read_buff[255]; /*wieviel Platz ist notwendig? */
 	ssize_t r;
 	r = read(sock, read_buff, strlen(read_buff)+1); /*FileDescriptor vom richtigen Socket?)*/
 	
