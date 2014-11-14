@@ -1,2 +1,4 @@
 #ignore object files
 *.o
+
+tags
