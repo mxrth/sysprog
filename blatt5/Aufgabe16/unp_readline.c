@@ -7,6 +7,7 @@ See http://www.unpbook.com
 
 */
 
+#include <stdio.h>
 #include "unp_readline.h"
 #include <unistd.h>
 #include <errno.h>
@@ -40,10 +41,11 @@ readline(int fd, void *vptr, size_t maxlen)
 {
 	ssize_t	n, rc;
 	char	c, *ptr;
-
+	printf("readline is working\n");
 	ptr = vptr;
 	for (n = 1; n < maxlen; n++) {
 		if ( (rc = my_read(fd, &c)) == 1) {
+			printf("I'm storing what I read\n");
 			*ptr++ = c;
 			if (c == '\n')
 				break;	/* newline is stored, like fgets() */

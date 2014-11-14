@@ -16,6 +16,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#include "unp_readline.h"
+
 
 /*Von Aufgabe 12 */
 struct in_addr get_in_addr(char* hostname) {
@@ -36,15 +38,18 @@ struct in_addr get_in_addr(char* hostname) {
 int main() {
 
 	/*Hostname */
-	char *hostname = ""; /*Hostname muss eingefügt werden */
+	/*Max :char *hostname = "172.16.1.101"; *//*Hostname muss eingefügt werden */
+	
+	char *hostname = "net.cs.uni-bonn.de";
+	
+	
 	/*Serveradresse */
 	struct sockaddr_in dest;
 	dest.sin_family = AF_INET;
 	dest.sin_port = htons(80);
-	dest.sin_addr.s_addr = *inet_ntoa(get_in_addr(hostname));
+	dest.sin_addr = (get_in_addr(hostname)); 
 	
-	/*Länge der Adressstruktur */
-	/*socklen_t addrlen; --bestimmung addrlen */
+	printf(" was Max Funktion get_in_addr() zurückgibt: %s \n", inet_ntoa(dest.sin_addr));
 	
 	/*Socketerstellung*/
 	int sock;
@@ -59,11 +64,16 @@ int main() {
 	if(c < 0){
 			ERROR("Wasn't able to call function connect")	
 		}
-		
+	
+	printf(" Connected! \n");
+	
 	/*write() */
 
 	ssize_t t;
-	char write_buff[]; /*füllen mit inhalt*/
+	char write_buff[255];
+	
+	strcpy(write_buff,"GET de/wg/cs/lehre/ws-201415/sysprog.html HTTP/1.1 \r\n From: Gruppe42 \r\n Host: net.cs.uni-bonn.de \r\n \r\n");
+	
 	ssize_t count = strlen(write_buff)+1;
 	t =	write(sock, write_buff, count); /*write_buff oder  &write_buff?*/
 	
@@ -75,15 +85,27 @@ int main() {
 		ERROR("Wasn't able to write everything")	
 	}	
 	
+	printf(" Get Anfrage geschickt \n");
+	
+	
+	
 	/* read() */
-	char read_buff[]; /*wieviel Platz ist notwendig? */
+
+	
+	char read_buff[MAXLINE]; /*wieviel Platz ist notwendig? */
 	ssize_t r;
-	r = read(sock, read_buff, strlen(read_buff)+1); /*FileDescriptor vom richtigen Socket?)*/
+	r = readline(sock, read_buff, strlen(read_buff)); 
+	
+	printf("Antwort gelesen! r = %i \n",r);
 	
 	/*Fehlerabfangen */
 	if(r < 0){
 		ERROR("Wasn't able to read")	
 	}
+
+	
+	/*Ausgabe in der Konsole */
+	printf("Im read_buffer : %s \n",read_buff);
 	/* =0 Verbindungsabbau */
 	
 	/*close*/
@@ -92,6 +114,8 @@ int main() {
 	if(clos < 0){
 			ERROR("Wasn't able to close the socket")	
 		}
+		
+	printf("Socket erfolgreich geschlossen");
 	
 	return 0;
 }
