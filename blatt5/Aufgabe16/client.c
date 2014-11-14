@@ -121,24 +121,25 @@ int main() {
 		printf("%s ",read_buff);
 	}
 	
-	/*restlichen Test in Datei speichern */
+	/*restlichen Test in Datei speichern und Übungszettel ausgeben*/
+	
+	printf("\nDie Übungszettel: \n ");
+	
 	FILE * file;	
 	file = fopen("zettel.html", "w");
 	int err;
 	if(file == NULL) {
 		ERROR("File couldn't be opened")
 	}
-	
 	while(1) {
 		r = readline(sock, read_buff, MAXLINE); 
-		printf("%s ",read_buff);
+
 		/*Fehlerabfangen */
 		if(r < 0){
 			ERROR("Wasn't able to read")	
 		}
 		
 		if(strstr(read_buff, "</body>")!= NULL) {
-		printf("I reached the body");
 			break;
 		}
 		
@@ -147,6 +148,21 @@ int main() {
 		err = fputs(read_buff, file);
 		if(err < 0){
 			ERROR("Wasn't able to write into file")	
+		}
+		
+		/*Ausgeben der Übungszettel */
+		int i=1;
+		while(strstr(read_buff, "Uebungsblatt")!= NULL) {
+			char search[50];
+			sprintf(search, "Uebungsblatt0%i.pdf",i);
+			
+			if(strstr(read_buff, search) != NULL){
+				printf("%s\n",search);
+			}
+			else {
+				break;
+			}
+			i++;			
 		}
 	}
 	
