@@ -16,6 +16,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#include "unp_readline.h"
+
 
 /*Von Aufgabe 12 */
 struct in_addr get_in_addr(char* hostname) {
@@ -63,21 +65,29 @@ int main() {
 	if(c < 0){
 			ERROR("Wasn't able to call function connect")	
 		}
-		
+	
+printf(" Ich bin verbunden \n");
+	
 	/*write() */
 
 	ssize_t t;
 	char write_buff[255]; /*füllen mit inhalt*/
+	
+	strcpy(write_buff,"hello, ben!\r\n");
+	
 	ssize_t count = strlen(write_buff)+1;
 	t =	write(sock, write_buff, count); /*write_buff oder  &write_buff?*/
 	
 	/*Überprüfung ob write() korrekt ausgeführt wurde */
+
 	if(t < 0){
 		ERROR("Wasn't able to write anything")	
 	}
 	if(t < count){
 		ERROR("Wasn't able to write everything")	
 	}	
+	
+printf(" Write wurde korrekt ausgeführt \n");
 	
 	/* read() */
 	char read_buff[255]; /*wieviel Platz ist notwendig? */
