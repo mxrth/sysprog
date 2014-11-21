@@ -1,0 +1,13 @@
+CC := clang
+
+override CFLAGS += -g3 -Wall -Wextra --std=gnu99 --pedantic
+
+EXECUTABLE := server 
+
+server: server.c util.h unp_readline.c unp_readline.h
+	$(CC) $(CFLAGS) -o server server.c unp_readline.c
+
+.PHONY: all clean
+
+clean:
+	-rm -rf $(OBJECTS) $(EXECUTABLE)
