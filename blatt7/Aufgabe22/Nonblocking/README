@@ -1,0 +1,5 @@
+top zeigt volle cpu-auslastung, da sog. busy-waiting implementiert wurde,
+das heisst das warten auf eingabe passiert komplett im chat-prozess
+dieser kann dann nicht vom betriebssystem "schlafen gelegt" werden.
+
+Alternativen wären signalgesteuertes io, oder warten via select()
