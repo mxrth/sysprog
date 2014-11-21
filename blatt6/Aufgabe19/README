@@ -1,0 +1,5 @@
+21: year anstatt &year, wollen tatsächlichen wert, nicht adresse ausgeben
+28: Wieso einen int-pointer übergeben? int reicht völlig aus 
+    (-> &year zu year in 20 und änderung der funktionsdeklaration in 4)
+15 ff.: Eingabe einer negativen zahl, gefolgt von einer nicht-parsable Eingabe
+	resultiert in einer endlosschleife, fix: erst lesen, dann parsen.
