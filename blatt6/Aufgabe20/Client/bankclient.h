@@ -5,5 +5,6 @@ int handle_connection(int socket);
 
 int handle_user_input(char *user_input);
 
+int check_user_input(char *user_input);
 
 #endif
