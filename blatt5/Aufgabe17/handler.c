@@ -85,6 +85,10 @@ int manager(FILE *datastream, char *information)
 	}
 
 	first_line = fgets(first_line, MAX_LINE , datastream);	
+	if(first_line == NULL) {
+	    printf("Client closed connection?\n");
+	    return 1;
+	}
 	
 	printf("First line of request is:\n%s\n",first_line);
 	

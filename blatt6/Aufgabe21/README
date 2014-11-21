@@ -1,0 +1,38 @@
+Nur tcp-socket: ss -t
+Alle sockets: ss -a
+
+
+Versuch: (#: kommentar, $i: shelleingabe auf terminal i, rest: ausgabe)
+#referenzausgabe
+$1 ss -ta --numeric
+State	Recv-Q	Send-Q	Local Address:Port  Peer Address:Port   
+
+#tcpserver starten
+$2 ./tcpserver 10 2006
+Server is going to handle 10 requests on port 2006
+This socket has port 2006
+
+$1 ss -ta --numeric
+State   Recv-Q Send-Q	Local Address:Port  Peer Address:Port 
+LISTEN  0      5        *:2006              *:*
+
+$3 netcat localhost 2006
+
+$1 ss -ta --numeric
+State	Recv-Q	Send-Q	Local Address:Port  Peer Address:Port 
+LISTEN  0       5       *:2006              *:*     
+ESTAB   0       0       127.0.0.1:2006      127.0.0.1:47892 
+ESTAB   0       0       127.0.0.1:47892     127.0.0.1:2006  
+
+$3 ^C #killing with (strg-c)
+
+$1 ss -ta --numeric
+State	Recv-Q Send-Q   Local Address:Port    Peer Address:Port   
+LISTEN  0      5        *:invokator           *:*
+
+###############################################################
+
+Man kann hier den server dabei beobachtem, wie er erst ein listening socket erstellt, (state LISTEN)
+dann mit accept ein neues socket erzeugt (State ESTAB im neuen, State LISTEN im alten )
+Nach dem kill ist dann nur noch das LISTEN-Socket vorhanden
+

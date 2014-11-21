@@ -1,0 +1,4 @@
+(a) Legal (inkrementiert den pointer um i*sizeof(*p1) bytes)
+(b) Legal, + kommutiert, siehe oben
+(c) Illegal, (Pointer multiplizeren illegal , einzige supportede operation + und -)
+(d) Legal 
