@@ -5,8 +5,10 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "bankclient.h"
+#include "util.h"
 
 int handle_connection(int socket){
 	int err;	
@@ -19,7 +21,10 @@ int handle_connection(int socket){
   		err = read(socket,buffer,100);
 		if(err <= 0){
 	    	printf("Failure to read, probably the server wants to close.\n");
-			close(socket);
+			err = close(socket);
+			if(err == -1){
+				ERROR("Could not close socket.");			
+			}
 			return 0;
 		}
 		printf("Answer from the server:\n%s\n", buffer);
@@ -29,7 +34,10 @@ int handle_connection(int socket){
 			err = handle_user_input(user_input);
 			if(err == 0){
 				printf("Closing this session\n");
-				close(socket);
+				err = close(socket);
+				if(err == -1){
+					ERROR("Could not close socket.");			
+				}
 				return 0;
 			}
 			if(err == -1){
@@ -42,7 +50,10 @@ int handle_connection(int socket){
 	  		if(err <= 0){
 				printf("Failure to write, probably the server wants to close.\n");
 				printf("Closing this session\n");
-				close(socket);
+				err = close(socket);
+				if(err == -1){
+					ERROR("Could not close socket.");			
+				}
 				return 0;
 			}
 			break;
@@ -67,10 +78,40 @@ int handle_user_input(char *user_input){
 	if(err == NULL){
 		return -1;
 	}
-
 	if(user_input[0] == 'Q'){
 		return 0;
-	}	
-	
-	return 1;
+	}
+
+	if(check_user_input(user_input) == 1){
+		return 1;
+	}
+	else return -1;
+}
+
+/*Input: A string that is supposed to be in the format 'Command' 'Number'
+*This function verifies if this is correct
+*
+*/
+int check_user_input(char *user_input){
+	int i,k;
+
+	for(i=0;i<100;i++){
+		if(isalpha(user_input[i])){
+			continue;		
+		}
+		break;
+	}
+	if(i < 1) return -1;
+	if(!isspace(user_input[i])){
+		return -1;
+	}
+	for(k=i+1;k<100;k++){
+		if(isdigit(user_input[k])){
+			continue;
+		}
+		break;
+	}
+	if(k==i+1) return -1;
+	if(user_input[k] == '\n'){return 1;}
+	else return -1;	
 }
