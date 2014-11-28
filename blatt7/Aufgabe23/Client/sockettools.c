@@ -2,7 +2,10 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
 #include <unistd.h>
+
+#include "util.h"
 
 int get_address(struct sockaddr_in *server_address){
 	int n_items, portnumber_temp;
@@ -43,4 +46,13 @@ int prepare_socket_tcp(){
 	}	
 	
 	return socknumber;
+}
+
+struct sockaddr_in getsockname_wrapper(int socketfd){
+	struct sockaddr_in addr;
+	socklen_t addrlength = sizeof(addr);
+	if(getsockname(socketfd, &addr, &addrlength)==-1){
+		ERROR("getsockname() failed!");
+	}
+	return addr;
 }

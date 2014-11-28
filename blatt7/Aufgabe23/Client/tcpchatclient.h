@@ -3,7 +3,7 @@
 
 int get_nickname(char* nickname);
 
-
+int handle_connection(int socketfd, char* nickname);
 
 
 

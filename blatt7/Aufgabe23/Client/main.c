@@ -35,7 +35,9 @@ int main(int argc, char* argv[]){
 	
 	printf("Hello, %s!\nYou can now start typing messages and will recieve messages from the other people.\n",nickname);
 
-	//handle_connection(new_socket);
+	handle_connection(new_socket, nickname);
 
+	close(new_socket);	
+	
 	return 0;
 }
