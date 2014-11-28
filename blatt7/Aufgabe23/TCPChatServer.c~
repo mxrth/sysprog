@@ -1,0 +1,84 @@
+
+#include <sys/select.h>
+#include <sys/time.h>
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+
+#include "util.h"
+#include <errno.h>
+#include <string.h>
+#include "unp_readline.h"
+
+
+int prepare_socket(int portnum, int *tcp_sock)
+{
+	int err;
+	struct sockaddr_in myaddr;
+
+	myaddr.sin_family = AF_INET;
+	myaddr.sin_port = htons(portnum);
+	myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	
+	*tcp_sock = socket(AF_INET,SOCK_STREAM,0);
+	if(*tcp_sock < 0){
+		return -1;
+	}
+
+	err = bind(*tcp_sock, (struct sockaddr*) &myaddr, sizeof(struct sockaddr_in));
+	if(err < 0){
+		return -2;	
+	}
+
+	/*Setting socket into passive mode*/
+	err = listen(*tcp_sock, 5);
+	if(err < 0){
+		return -3;	
+	}
+
+	return 0;
+}
+
+int main() {
+
+	int err;
+
+	/*prepare listening sockets ? */
+	int sock;
+	err = prepare_socket(4711, &sock);
+	if(err < 0){
+		ERROR(Couldn't prepare socket);	
+	}
+	
+	/*making fd_set for listing open sockets */
+	fd_set readfds, writefds, exceptfds;
+
+	
+	/*select loop with reading and sending messages */
+
+	
+	/* look for and handle incoming connections */
+	void FD_SET (int filedes, fd_set *set)
+
+	err = select(FD_SETSIZE, &readfds, &writefds,
+	&exceptfds, struct timeval *timeout);
+	if(err < 0){
+		ERROR(Some client is doing weird stuff);	
+	}
+
+	/*closing sockets for diconnected clients */
+
+
+	/*closing socket */
+	err = close(sock);
+
+	if(err < 0){
+		ERROR("Couldn't close socket")
+	}
+
+	return 0;
+}

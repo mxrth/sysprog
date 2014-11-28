@@ -2,10 +2,10 @@ CC := clang
 
 override CFLAGS += -g3 -Wall -Wextra --std=gnu99 --pedantic
 
-EXECUTABLE := server 
+EXECUTABLE := tcpchatserver 
 
-server: server.c util.h unp_readline.c unp_readline.h
-	$(CC) $(CFLAGS) -o server server.c unp_readline.c
+tcpchatserver: TCPChatServer.c util.h unp_readline.c unp_readline.h
+	$(CC) $(CFLAGS) -o tcpchatserver TCPChatServer.c unp_readline.c
 
 .PHONY: all clean
 
