@@ -214,10 +214,10 @@ int main(int argc, char **argv) {
 
 	}
 
-		err = close(sockListenFd);
+	err = close(sockListenFd);
 
-		if(err < 0){
-			ERROR("Couldn't close socket")
-		}
+	if(err < 0){
+		ERROR("Couldn't close socket")
+	}
 	return 0;
 }
