@@ -12,19 +12,30 @@
 #include "unp_readline.h"
 #include <sys/select.h>
 #include <stdlib.h>
-
+/*
+ * This structure encapuslated the complete server state
+ */
 typedef struct {
-    int listen_fd;
+    int listen_fd; /* the listening socket, used to accept() new clients*/
 
+    /*account infos*/
     int num_accounts;
     int *accounts;
 
+    /*These variables store the state of the Clients
+     * Clients in sate ACCEPTED (ready to send a port number), are stored in accepted
+     * Clients in state WAITING (waiting for the release of an account, 
+     * are stored in waiting_for_account, grouped by account
+     * Clients in state MANAGING (currently operating on an account,
+     * are stored in managing_account, grouped by account
+     */
     fd_set accepted;
     fd_set *waiting_for_account;
     int *managing_account;
-
+    
+    /* read_fds contains _all_ file descriptors */
     fd_set read_fds;
-    int max_fd;
+    int max_fd; /*acutally never decremented, beware of ddos*/
 } server_state;
 
 int prepare_socket(int port, int *sock);
@@ -83,7 +94,9 @@ void init_state(server_state *state) {
     for(int i = 0; i < state->num_accounts; i++)
 	state->managing_account[i] = -1;
 }
-
+/*
+ * The main select loop, distinguishes between events on listening socket, and connected clients
+ */
 void handle_event(server_state *state) {
     fd_set read_fds = state->read_fds; /*make a local copy of the fd_set to pass to select*/
     int num_ready = select(state->max_fd+1, &read_fds, NULL, NULL, NULL);
@@ -101,6 +114,10 @@ void handle_event(server_state *state) {
     }
 }
 
+/*
+ * Handles a new client,
+ * sets him to state 'ACCEPTED' which means the client can now select an account
+ */
 void handle_new_client(server_state *state) {
     printf("Handling new cleint\n");
     int new_client = accept(state->listen_fd, NULL, NULL);
@@ -114,6 +131,11 @@ void handle_new_client(server_state *state) {
     write(new_client, response, strlen(response));
 }
 
+/*
+ * Distinguishes between an account request (state ACCEPTED) (which might set the client on hold)
+ * And a transaction (state MANAGING)
+ * Ignores clients in state WAIT
+ */
 void handle_transaction(int client, server_state *state) {
     int account, closed;
     if(FD_ISSET(client, &state->accepted)) {
@@ -125,14 +147,22 @@ void handle_transaction(int client, server_state *state) {
     }
 }
 
+/*
+ * Returns the account a client is currently managing
+ */
 int is_managing(int client, server_state *state) {
     for(int account = 0; account < state->num_accounts; account++) {
 	if(state->managing_account[account] == client)
-	    return client;
+	    return account;
     }
     return -1;
 }
 
+/*
+ * Handles the request of an account: a client in state ACCEPTED, that sent a account number
+ * if the account is free , the client is set to state MANAGING
+ * else to state WAITING
+ */
 void handle_account_request(int client, server_state *state) {
     //read which account the client wants
     printf("handling account request\n");
@@ -140,22 +170,32 @@ void handle_account_request(int client, server_state *state) {
     ssize_t r;
     r = readline(client, read_buff, 300); 
     if(r == 0) { //client quit
-	FD_CLR(client, &state->accepted);
+	printf("closing client");
+	close_client(client, state);
+	return;
     }
     int account = atoi(read_buff);
+    printf("requesting account %i\n", account);
     if(account < 0 || account >= state->num_accounts) {
 	char message[] = "Invalid account, closing...";
 	write(client, message, strlen(message));
 	close_client(client, state);
     }
     if(state->managing_account[account] == -1) {
+	printf("Account is free\n");
 	state->managing_account[account] = client;
 	write_account(client, &state->accounts[account]);
     } else {
+	printf("client has to wait\n");
 	FD_SET(client, &state->waiting_for_account[account]);
     }
+    FD_CLR(client, &state->accepted);
 }
 
+/*
+ * Terminates the session of a client in state MANAGING
+ * Promotes a WAITING client to MANAGING, if such a client is present
+ */
 void shutdown_client(int client, server_state *state) {
     int managed_account = 0, c_waiting;
     for(; managed_account < state->num_accounts; managed_account++) {
@@ -166,21 +206,29 @@ void shutdown_client(int client, server_state *state) {
     if( (c_waiting = client_waiting_for(managed_account, state)) > 0 ) {
 	FD_CLR(c_waiting, &state->waiting_for_account[managed_account]);
 	state->managing_account[managed_account] = c_waiting;
-	write_account(client, &state->accounts[managed_account]);
+	write_account(c_waiting, &state->accounts[managed_account]);
     } else {
 	state->managing_account[managed_account] = -1;
     }
     close_client(client, state);
 }
 
+/*
+ * If there is a client waiting for the given account, return the fd of this client, 
+ * -1 otherwise
+ */
 int client_waiting_for(int acc, server_state *state) {
-    for(int cl = 0; cl < state->max_fd; cl++) {
+    for(int cl = 0; cl <= state->max_fd; cl++) {
 	if(FD_ISSET(cl, &state->waiting_for_account[acc]))
 	    return cl;
     }
     return -1;
 }
 
+/*
+ * Closes the client-fd, and erases him from all fd_sets
+ * does not do a state transition (use client_shutdown instead)
+ */
 void close_client(int client, server_state *state) {
     int m_acc, w_acc;
     
@@ -196,6 +244,10 @@ void close_client(int client, server_state *state) {
     close(client);
 }
 
+/*
+ * Checks if the client is waiting for a account, and returns this account
+ * -1 if the client is not waiting for anything
+ */
 int is_waiting(int client, server_state *state) {
     for(int acc = 0; acc < state->num_accounts; acc++) {
 	if(FD_ISSET(client, &state->waiting_for_account[acc]))

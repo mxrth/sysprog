@@ -68,7 +68,7 @@ void write_account(int newfd, int *acc) {
     ssize_t count;
     char accountstr[30];
     sprintf(accountstr, "%i",*acc);
-    count = strlen(accountstr)+1;
+    count = strlen(accountstr);//+1;
     t = write(newfd, accountstr, count);
     /*Überprüfung ob write() korrekt ausgeführt wurde */
     if(t < 0){

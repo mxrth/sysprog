@@ -32,11 +32,11 @@ int handle_connection(int socket){
 		printf("%s\n", buffer);
 	/*Getting User input: the account (socket) they want to use */
 	int i;
-	printf("please enter here the number of the account you want to use");
+	printf("please enter here the number of the account you want to use\n");
 	scanf("%d",&i);  
 
 	/*send server the account number */
-	sprintf(user_input, "%i",i);
+	sprintf(user_input, "%i\n",i);
 	err = write(socket,user_input,strlen(user_input));
 	if(err <= 0){
 		printf("Failure to write, probably the server wants to close.\n");
