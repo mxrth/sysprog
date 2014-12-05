@@ -31,9 +31,21 @@ int handle_connection(int socket){
 		}
 		printf("%s\n", buffer);
 	/*Getting User input: the account (socket) they want to use */
-
+	int i;
 	printf("please enter here the number of the account you want to use");
+	scanf("%d",&i);  
 
+	/*send server the account number */
+	sprintf(user_input, "%i",i);
+	err = write(socket,user_input,strlen(user_input));
+	if(err <= 0){
+		printf("Failure to write, probably the server wants to close.\n");
+		printf("Closing this session\n");
+		err = close(socket);
+		if(err == -1){
+			ERROR("Could not close socket.");			
+		}			
+	}
 	/*bis hier, jetzt folgt Bens Code */
 	
 	while(1){

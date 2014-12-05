@@ -4,7 +4,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
-#include "socket.h"
+#include "sockettools.h"
 
 int get_address(struct sockaddr_in *server_address){
 	int n_items, portnumber_temp;
