@@ -1,0 +1,27 @@
+(b)
+cnt = 0, fork_pid =  2557, my_pid =  3384
+cnt = 1, fork_pid =  3385, my_pid =  3384
+cnt = 1, fork_pid =     0, my_pid =  3385
+cnt = 2, fork_pid =  3386, my_pid =  3384
+cnt = 2, fork_pid =  3387, my_pid =  3385
+cnt = 2, fork_pid =     0, my_pid =  3387
+cnt = 2, fork_pid =     0, my_pid =  3386
+
+Der Aufruf erzeugt 7 Ausgabezeilen.
+
+In Zeile 1 ist das Programm in Zeile 6. Somit ist cnt = 0. Da der Prozess kein Parentprozess ist, fork_pid = getppid() aber immer etwas zurückgibt, ist fork_pid eine Zahl. my_pid ist die Prozess-ID des Prozesses
+
+In Zeile Zwei wurde ein fork() durchgeführt. Da fork_pid, die Rückgabe von fork(), > 0 handelt es sich um den Parent-Prozess. Somit ist my_pid, auch gleich zu Zeile 1. Der Wert von fork_pid, ist die Prozess-ID vom Child-Prozess in 
+
+Zeile 3. Da es ein Child-Prozess ist, ist fork_pid, die Rückgabe von fork(), = 0. my_pid ist eine neue Prozess ID.
+
+Wieder wurde ein fork() durchgeführt. Sowohl im Paren-Prozess von Zeile 2 als auch im Child-Prozess in Zeile 3. 
+cnt wurde um 1 erhöht. 
+In Zeile 4 befindet sich der ehemalige und neue Parent-Prozess der mit gleicher my_pid in Zeile 1 und 2 ist. Die in fork_pid geschriebene Prozess ID seines zugehörigen Child-Prozesses befindet sich in Zeile 7, wo man sie bei my_pid findet. Die fork_pid des Child-Prozesses ist 0, damit es sich als Child-Prozess erkennen kann.
+
+In Zeile 5 befindet sich der Parent-Prozess des Child-Prozesses, des Ursprungsprozesses. Und der dazugehörige Child-Prozess in Zeile 6. Die Rückgabe von fork() in fork_pid des Parent_Prozesses ist gleich der Prozess-ID des Childs-Prozesses in Zeile 6.
+
+(c)
+
+Nach dem fork() laufen Parent-Prozess und Child-Prozess parallel weiter. Je nachdem in welchem Prozess zuerst das nächste fork() durchgeführt wird und das nächste print() ausgeführt wird, variiert die Reihenfolge der Ausgabe der Prozesse.
+Gelegentlich passiert, dass ein print() eines Child-Prozesses noch ausgeführt wird, nachdem das Terminal den Prozess für beendet erklärt hat. Indem Fall wurde, der Parent-Prozess schon geschlossen und Child-Prozess-Zombies können noch existieren.
