@@ -1,5 +1,9 @@
 package main
 
+/*"Comments" in import are actually important, because they actually tell
+the go compiler to include <stdlib.h> and "rot13.h"
+*/
+
 import (
 	"bufio"
 	"os"
@@ -13,9 +17,8 @@ import (
 const delim = '\n'
 
 func main() {
-
 	r := bufio.NewReader(os.Stdin)
-	
+
 	for true{
 		fmt.Println("Please enter the string that you want to encrypt:")
 		line, err := r.ReadString(delim)
@@ -28,7 +31,7 @@ func main() {
 
 		fmt.Println("The encrypted text is:")
 		fmt.Println(encrypt(line))
-		
+
 	}
 
 }
