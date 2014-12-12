@@ -1,10 +1,16 @@
+/*Here the data section of the program begins*/
 .section .data
 
+/*.ascii assembles the string which is given to it into consecutive addresses*/
 str:	.ascii "Hello world!\n"
-		strlen = . - str
+		strlen = . - str 	/*This computes the length of the string:
+							 *'.' is used for the address where the assembler is at this moment
+							 *Then it is just basic pointer arithmetic
+							 */
 
 num: 	.long 1337
 
+/*The text section contains the actual code of the program*/
 .section .text
 
 /*This label is for the linker*/
