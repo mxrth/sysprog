@@ -9,6 +9,10 @@
 #Variables:	int x - counter for cols of M2 -saved on the stack at -4(%ebs)
 #		int y - counter for rows of M1 -saved on the stack at -8(%ebs)
 #		int z - counter for cols of M1/ rows of M2 - in register %edx
+.section .data			
+.section .text
+
+.type mmul,@function
 
 mmul:
 		push %ebp			# saving current basepointer	
