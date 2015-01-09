@@ -2,7 +2,7 @@
 
 void print_matrix(int n, int m, int *M);
 
-void mmul(int n, int m, int k, int *M1, int *M2, int *M);
+extern void mmul(int n, int m, int k, int *M1, int *M2, int *M);
 
 int main()
 {
