@@ -73,7 +73,7 @@ func echoPrompt() {
     wd, err := os.Getwd()
     wd = filepath.Base(wd)
 
-    fmt.Printf("%s@%s %s$ ", username, host, wd);
+    fmt.Printf("\x1b[31;1m%s@%s\x1b[39;49m %s$\x1b[0m ", username, host, wd);
 }
 
 
