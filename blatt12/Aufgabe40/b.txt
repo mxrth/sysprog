@@ -1,0 +1,4 @@
+Die while-Schleifen-Iteration wird 3 mal "gestartet" und 6 mal "beendet":
+für i = 0 wird der Programmcode bis zum fork() einmal ausgeführt, der danach zweimal.
+für i = 1 wird der Programmcod bis zum fork() zweimal ausgeführt, danach viermal.
+für i = 2 wird dann auch viermal die Bedingung geprüft. 
