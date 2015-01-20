@@ -1,0 +1,21 @@
+a)
+Das Programm gibt das folgende aus:
+cnt = 0, thread_pid =  2494, my_pid =  2637
+cnt = 1, thread_pid =  2494, my_pid =  2637
+cnt = 2, thread_pid =  2494, my_pid =  2637
+
+zunächst wird in der main die Funktion printer() aufgerufen, die die erste Zeile erzeugt. cnt = 0 und wird beim Aufruf von printer() um eins erhöht.
+Die thread_pid gibt den returnwert von getppid() aus, my_pid, den returnwert von getpid().
+Anschließend wird ein neuer thread erstellt, der dann printer ausführt und cnt=1 ausgibt und dann inkrementiert. 
+Ein Thread hat eine eindeutige Thread-ID, allerdings wird diese nicht durch getppid() oder getpid() ermittelt. Diese Funktionen ermitteln Prozess-IDs und die Threads gehören zum selben Prozess. Daher sind die Ausgaben alle drei mal gleich.
+Während der neue Thread printer() ausführt schläft der mainthread für eine Sekunde. Daher wird das print sicher ausgeführt bevor die main weitermacht und einen weiteren Thread erstellt. (Daher braucht die Ausgabe der 3.Zeile auch ein bisschen länger, als die der ersten beiden) Somit ist sichergestellt, dass cnt immer in der Folge 0,1,2 erscheint.
+Der neue Thread führt wieder printer() aus. Anschließend werden die Threads wieder mit der Main zusammengeführt. 
+
+b)
+Das Programm gibt nun folgendes aus:
+cnt = 0, thread_pid =  2494, my_pid =  2700
+cnt = 1, thread_pid =  2494, my_pid =  2700
+cnt = 1, thread_pid =  2494, my_pid =  2700
+Da die neuen Threads bei der Ausführung von printer() zunächst eine Sekunde warten müssen, wird zunächst die main fortgesetzt und die beiden Threads direkt hintereinander erstellt. Dadurch starten sie beinah gleichzeitig mit der Ausführung von printer() und der zweite Thread führt print durch bevor cnt von dem ersten Thread inkrementiert wird.
+
+
