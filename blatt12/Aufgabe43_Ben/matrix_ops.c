@@ -1,0 +1,27 @@
+#include "matrix.h"
+
+int can_multiply(Matrix *A, Matrix *B) {
+    return A->columns == B->rows;
+}
+
+int matrix_multiply(struct matrix_multiply_args *args){
+
+	/*check dimensions */
+	if(!can_multiply(args->A,args->B) || args->A->rows != args->Result->rows || args->B->columns != args->Result->columns) {
+	    return 1;
+	}
+	/* calculate */
+	size_t i,j,k;
+
+	for(i=args->starting_row; i < (args->starting_row + args->lines_to_process) ; i++){
+		for(k=0;k < args->B->columns; k++){
+			args->Result->data[i][k] = 0;
+			for(j=0;j< args->A->columns; j++){				
+					args->Result->data[i][k] += args->A->data[i][j] * args->B->data[j][k];	
+			}
+		}
+	}
+	return 0;		
+
+}
+
